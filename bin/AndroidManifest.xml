@@ -22,6 +22,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AlmacenInter"
+            android:label="@string/title_activity_almacen_inter" >
+        </activity>
+        <activity
+            android:name=".AlmacenExtern"
+            android:label="@string/title_activity_almacen_extern" >
+        </activity>
+        <activity
+            android:name=".MediaAudio"
+            android:label="@string/title_activity_media_audio" >
+        </activity>
+        <activity
+            android:name=".MediaVideo"
+            android:label="@string/title_activity_media_video" >
+        </activity>
     </application>
 
 </manifest>

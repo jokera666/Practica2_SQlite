@@ -2,7 +2,10 @@ package com.nestor.practica2_sqlite;
 
 import java.util.ArrayList;
 
+
+
 import android.app.Activity;
+import android.content.Intent;
 import android.gesture.Gesture;
 import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
@@ -53,8 +56,27 @@ public class MainActivity extends Activity implements
 			// Miramos que tengo un parecido mínimo
 			if (prediccion.score > 1.5) {
 				// Decimos lo que ha escrito
-				Toast.makeText(this, prediccion.name, Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(this, prediccion.name, Toast.LENGTH_SHORT).show();
+				if(prediccion.name.equals("Uno")){
+					Intent intent = new Intent(MainActivity.this,AlmacenInter.class);
+					startActivity(intent);
+				}
+				
+				if(prediccion.name.equals("Dos")){
+					Intent intent = new Intent(MainActivity.this,AlmacenExtern.class);
+					startActivity(intent);
+				}
+				
+				if(prediccion.name.equals("Tres")){
+					Intent intent = new Intent(MainActivity.this,MediaAudio.class);
+					startActivity(intent);
+				}
+				
+				if(prediccion.name.equals("Cuatro")){
+					Intent intent = new Intent(MainActivity.this,MediaVideo.class);
+					startActivity(intent);
+				}
+	
 			} else {
 				// Si no supera el 1.5 de fiabilidad..
 				Toast.makeText(this, "No se ha reconocido.", Toast.LENGTH_SHORT)
