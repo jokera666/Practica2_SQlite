@@ -50,7 +50,7 @@ public final class R {
         public static final int action_settings=0x7f0a000a;
         public static final int gestureOverlayView1=0x7f0a0002;
         public static final int imageView1=0x7f0a0005;
-        public static final int listView1=0x7f0a0001;
+        public static final int miListView=0x7f0a0001;
         public static final int opcionDos=0x7f0a0007;
         public static final int opcionTres=0x7f0a0008;
         public static final int opcionUno=0x7f0a0004;

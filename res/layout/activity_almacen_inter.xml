@@ -8,23 +8,27 @@
     android:background="@drawable/metallica"
     android:scrollbars="horizontal" >
     
-	<LinearLayout 
+	<RelativeLayout 
 	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
+	    android:layout_height="wrap_content"
 	    tools:context="${relativePackage}.${activityClass}" >
 
+	    <!-- Cuando mas grandes son los primeros digidos menos transparente sera el color -->
 		<ListView
-		    android:id="@+id/listView1"
+		    android:id="@+id/miListView"
 		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_weight="1" >
+		    android:layout_height="150dp"
+		    android:layout_marginTop="20dp"
+		    android:background="#DD00FF00"
+		    android:scrollbars="none" >
 		</ListView>
 	
 	    <TextView
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:text="@string/hello_world" 
-	        android:gravity="center" />
+	        android:gravity="center"
+	        android:background="#FFFFF0" />
 
-	</LinearLayout>
+	</RelativeLayout>
 </ScrollView>
