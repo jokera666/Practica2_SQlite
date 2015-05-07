@@ -17,7 +17,7 @@
 		<ListView
 		    android:id="@+id/miListView"
 		    android:layout_width="match_parent"
-		    android:layout_height="150dp"
+		    android:layout_height="205dp"
 		    android:layout_marginTop="20dp"
 		    android:background="#DD00FF00"
 		    android:scrollbars="none" >

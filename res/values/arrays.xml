@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="listaOpciones">
+        <item name="0">Leer ficheros</item>
+        <item name="1">Escribir en ficheros</item>
+        <item name="2">Volver al menu principal</item>
+    </string-array>
+    
+</resources>

@@ -1,6 +1,12 @@
 package com.nestor.practica2_sqlite;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +21,8 @@ import android.widget.AdapterView.OnItemClickListener;
 public class AlmacenInter extends Activity {
     ListView listView ;
     String s = new String();
+    ElementoListaAdaptador elemento;
+    Toast mensaje;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,23 +32,16 @@ public class AlmacenInter extends Activity {
         // Get ListView object from xml
         listView = (ListView) findViewById(R.id.miListView);
         
-        // Defined Array values to show in ListView
-        String[] values = new String[] { "Leer ficheros", 
-                                         "Escribir en ficheros",
-                                         "Volver al menu principal <---",
-                                        };
-
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-          android.R.layout.simple_list_item_1, values);
-
-        // Assign adapter to ListView
-        listView.setAdapter(adapter); 
+        ArrayList<String> list = new ArrayList<String>(); // me creo un Arraylist de string
+        Resources res = getResources(); // obtener recurso recursos
+        Collections.addAll(list, res.getStringArray(R.array.listaOpciones)); // obtengo los recursos del array.xml y se los paso a mi lista
+ 
+        
+	    // Cree el adaptador 
+	    elemento  = new ElementoListaAdaptador(this,list);
+	    
+	    // establesco el mi adaptador al list view
+	    listView.setAdapter(elemento);
         
 		 
         
@@ -48,8 +49,7 @@ public class AlmacenInter extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 			    // When clicked, show a toast with the TextView text
-			    Toast.makeText(getApplicationContext(),
-				((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Has pulsado la opcion: "+position, Toast.LENGTH_LONG).show();
 			}
 		});
         

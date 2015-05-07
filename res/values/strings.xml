@@ -8,5 +8,6 @@
     <string name="title_activity_almacen_extern">Almacenamiento externo</string>
     <string name="title_activity_media_audio">Multimedia de Audio</string>
     <string name="title_activity_media_video">Multimedia de Video</string>
+    <string name="title_activity_elementos_list_menu">ElementosListMenu</string>
 
 </resources>

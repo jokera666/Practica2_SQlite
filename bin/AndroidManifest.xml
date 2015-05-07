@@ -38,6 +38,10 @@
             android:name=".MediaVideo"
             android:label="@string/title_activity_media_video" >
         </activity>
+        <activity
+            android:name=".ElementosListMenu"
+            android:label="@string/title_activity_elementos_list_menu" >
+        </activity>
     </application>
 
 </manifest>
