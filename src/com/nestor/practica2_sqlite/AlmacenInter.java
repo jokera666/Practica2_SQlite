@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
@@ -48,8 +49,27 @@ public class AlmacenInter extends Activity {
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				Intent intento;
 			    // When clicked, show a toast with the TextView text
 				Toast.makeText(getApplicationContext(), "Has pulsado la opcion: "+position, Toast.LENGTH_LONG).show();
+				switch(position)
+				{
+					case 0:
+						 intento = new Intent(AlmacenInter.this,LeerFichero.class);
+						 startActivity(intento);
+					break;
+					case 1:
+						intento = new Intent(AlmacenInter.this,MainActivity.class);
+						startActivity(intento);
+					break;
+					case 2:
+						 intento = new Intent(AlmacenInter.this,MainActivity.class);
+						 startActivity(intento);
+					break;	
+				}
+				
+				
+					
 			}
 		});
         

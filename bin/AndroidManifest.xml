@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -41,6 +42,10 @@
         <activity
             android:name=".ElementosListMenu"
             android:label="@string/title_activity_elementos_list_menu" >
+        </activity>
+        <activity
+            android:name=".LeerFichero"
+            android:label="@string/title_activity_leer_fichero" >
         </activity>
     </application>
 
