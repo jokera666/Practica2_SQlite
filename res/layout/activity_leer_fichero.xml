@@ -1,16 +1,40 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="${relativePackage}.${activityClass}" >
 
-    <ListView
-		    android:id="@+id/miListViewFicheros"
-		    android:layout_width="match_parent"
-		    android:layout_height="205dp"
-		    android:layout_marginTop="20dp"
-		    android:background="#DD00FF00"
-		    android:scrollbars="none" >
-		</ListView>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/ScrollView01"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@drawable/metallica"
+  android:scrollbars="horizontal" >
 
-</RelativeLayout>
+	<RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    tools:context="${relativePackage}.${activityClass}" >
+	
+	    <ListView
+			    android:id="@+id/miListViewFicheros"
+			    android:layout_width="match_parent"
+			    android:layout_height="205dp"
+			    android:layout_marginTop="20dp"
+			    android:background="#DD00FF00"
+			    android:scrollbars="none" >
+			</ListView>
+	
+	    <EditText
+	        android:id="@+id/mostrarTexto"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/miListViewFicheros"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="34dp"
+	        android:ems="10"
+	        android:background="#00FF00"
+	        android:gravity="top"
+			android:saveEnabled="true"
+			android:fadingEdge="horizontal"
+	   	 	android:scrollbarAlwaysDrawVerticalTrack="true"
+	    	android:scrollbars="vertical"/> 
+	</RelativeLayout>
+
+</ScrollView>

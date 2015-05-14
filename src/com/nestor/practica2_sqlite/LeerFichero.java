@@ -1,8 +1,10 @@
 package com.nestor.practica2_sqlite;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,43 +76,38 @@ public class LeerFichero extends Activity {
 				//Cuando pulses sobre el nombre de fichero el toast mostrar su posicion 
 				Toast.makeText(getApplicationContext(), "Posicion de fichero: "+nombreFichero.get(position), Toast.LENGTH_LONG).show();
                 //Devolvemos el resultado de la selección
-                Intent data = new Intent();
-                data.putExtra("filename", nombreFichero.get(position));
-                setResult(RESULT_OK, data);
+                //Intent data = new Intent();
+                //data.putExtra("filename", nombreFichero.get(position));
+                //setResult(RESULT_OK, data);
                 //finish();
-				switch(position){
-				case 1:
-					
-					
-				break;
-				}
+                String fichero = nombreFichero.get(position);
+                cargarTexto(fichero);
 			}
 		});
 	}
 	
     // Inserta en el cuadro de texto el contenido del fichero
-//    private void cargarTexto(){
-//    	// Abrir el fichero para lectura
-//        FileInputStream fis = null;
-//       	try {
-//       		fis = openFileInput();
-//       	} catch (FileNotFoundException e) {
-//       		Log.e("TAG", "lectura: FileNotFound");
-//       		return;
-//       	}
-//       	EditText texto = (EditText)findViewById(R.id.texto);
-//       	byte[] datos = new byte[1024]; 	// buffer de bytes para copiar ah’ el contenido
-//       	String lectura = "";			// texto que se insertar‡ en el cuadro
-//       	int leidos = 0;
-//       	try{
-//       		// A–adir los datos le’dos mientras que todav’a queden
-//       		while ((leidos = fis.read(datos))>0){ // read(byte[]) devuelve el nœmero de bytes leídos
-//       			lectura += (new String(datos)).substring(0, leidos);
-//       		}
-//       		fis.close();
-//       	} catch(IOException e){
-//       		Log.e("TAG", "lectura: IOException");
-//       	}
-//   		texto.setText(lectura);
-//    }
+    private void cargarTexto(String fichero){
+    	// Abrir el fichero para lectura
+       	File f = new File(Environment.getExternalStorageDirectory()+"/misFicheros/"+fichero);
+       	StringBuilder text = new StringBuilder();
+
+       	try {
+       	    BufferedReader br = new BufferedReader(new FileReader(f));
+       	    String line;
+
+       	    while ((line = br.readLine()) != null) {
+       	        text.append(line);
+       	        text.append('\n');
+       	    }
+       	    br.close();
+       	}
+       	catch (Exception e) {
+       	    //You'll need to add proper error handling here
+       		Toast.makeText(getApplicationContext(), "Hay un error al leer el fichero.", Toast.LENGTH_LONG).show();
+       	}
+
+       	EditText texto = (EditText)findViewById(R.id.mostrarTexto);
+   		texto.setText(text);
+    }
 }
