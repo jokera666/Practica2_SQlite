@@ -7,34 +7,61 @@
   android:background="@drawable/metallica"
   android:scrollbars="horizontal" >
 
-	<RelativeLayout 
+	<RelativeLayout
 	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
+	    android:layout_height="500dp"
 	    tools:context="${relativePackage}.${activityClass}" >
-	
+
 	    <ListView
-			    android:id="@+id/miListViewFicheros"
-			    android:layout_width="match_parent"
-			    android:layout_height="205dp"
-			    android:layout_marginTop="20dp"
-			    android:background="#DD00FF00"
-			    android:scrollbars="none" >
-			</ListView>
-	
-	    <EditText
+	        android:id="@+id/miListViewFicheros"
+	        android:layout_width="match_parent"
+	        android:layout_height="205dp"
+	        android:layout_marginTop="20dp"
+	        android:background="#DD00FF00"
+	        android:scrollbars="none" >
+	    </ListView>
+
+	    <TextView
 	        android:id="@+id/mostrarTexto"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/miListViewFicheros"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="34dp"
-	        android:ems="10"
 	        android:background="#00FF00"
+	        android:fadingEdge="horizontal"
 	        android:gravity="top"
-			android:saveEnabled="true"
-			android:fadingEdge="horizontal"
-	   	 	android:scrollbarAlwaysDrawVerticalTrack="true"
-	    	android:scrollbars="vertical"/> 
+	        android:saveEnabled="true"
+	        android:scrollbarAlwaysDrawVerticalTrack="true"
+	        android:scrollbars="vertical"
+	        android:textSize="20sp" />
+
+	    <Button
+	        android:id="@+id/borrarTodo"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/mostrarTexto"
+	        android:layout_marginLeft="33dp"
+	        android:layout_marginTop="30dp"
+	        android:textColor="#00FF00"
+	        android:textStyle="bold"
+	        android:textSize="25sp"
+	        android:text="Borrar Todo" />
+
+	    <Button
+	        android:id="@+id/volver"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/borrarTodo"
+	        android:layout_alignBottom="@+id/borrarTodo"
+	        android:layout_marginLeft="16dp"
+	        android:layout_toRightOf="@+id/borrarTodo"
+	       	android:textColor="#00FF00"
+	        android:textStyle="bold"
+	        android:textSize="25sp"
+	        android:text="Volver" />
+
 	</RelativeLayout>
 
 </ScrollView>

@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 
+
 import android.R.string;
 import android.app.Activity;
 import android.content.Intent;
@@ -24,12 +25,15 @@ import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LeerFichero extends Activity {
 	ArrayList<String> nombreFichero;
+	File[] files;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,7 +46,7 @@ public class LeerFichero extends Activity {
         //Defino la ruta donde busco los ficheros
         File fichero = new File(Environment.getExternalStorageDirectory()+"/misFicheros/");
         //Creo el array de tipo File con el contenido de la carpeta
-        File[] files = fichero.listFiles();
+        files = fichero.listFiles();
  
         //Hacemos un Loop por cada fichero para extraer el nombre de cada uno
         for (int i = 0; i < files.length; i++)
@@ -84,6 +88,42 @@ public class LeerFichero extends Activity {
                 cargarTexto(fichero);
 			}
 		});
+        
+        Button btnVolver = (Button) findViewById(R.id.volver);
+        btnVolver.setOnClickListener(new View.OnClickListener() 
+        {
+			
+			@Override
+			public void onClick(View v)
+			{
+			Intent intent = new Intent(LeerFichero.this,AlmacenInter.class);
+			startActivity(intent);	
+			}
+		});
+        
+        Button btnBorrarTodo = (Button) findViewById(R.id.borrarTodo);
+        btnBorrarTodo.setOnClickListener(new View.OnClickListener() 
+        {
+			
+			@Override
+			public void onClick(View v)
+			{
+
+		        
+				try {
+			        for (int i = 0; i < files.length; i++)
+			        	 
+			        {
+			        	File file = files[i];
+			            if (!file.delete()) throw new IOException("El fichero " + files[i] + " no puede ser borrado!");
+			        }
+				} 
+				
+				catch (IOException e) {
+					Toast.makeText(getApplicationContext(),"Error: "+e, Toast.LENGTH_LONG).show();
+				} // end try
+			}
+		});
 	}
 	
     // Inserta en el cuadro de texto el contenido del fichero
@@ -101,13 +141,14 @@ public class LeerFichero extends Activity {
        	        text.append('\n');
        	    }
        	    br.close();
+       	    
        	}
        	catch (Exception e) {
        	    //You'll need to add proper error handling here
        		Toast.makeText(getApplicationContext(), "Hay un error al leer el fichero.", Toast.LENGTH_LONG).show();
        	}
 
-       	EditText texto = (EditText)findViewById(R.id.mostrarTexto);
+       	TextView texto = (TextView)findViewById(R.id.mostrarTexto);
    		texto.setText(text);
     }
 }
