@@ -20,8 +20,8 @@ import android.widget.AdapterView.OnItemClickListener;
 
 
 public class AlmacenInter extends Activity {
-    ListView listView ;
-    String s = new String();
+	///Propiedades de la clase AlmacenInter
+    ListView listView;
     ElementoListaAdaptador elemento;
     Toast mensaje;
     
@@ -30,16 +30,13 @@ public class AlmacenInter extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_almacen_inter);
         
-        // Get ListView object from xml
-        listView = (ListView) findViewById(R.id.miListView);
+        listView = (ListView) findViewById(R.id.miListView); //asigno mi ListView del xml
         
-        ArrayList<String> list = new ArrayList<String>(); // me creo un Arraylist de string
-        Resources res = getResources(); // obtener recurso recursos
-        Collections.addAll(list, res.getStringArray(R.array.listaOpciones)); // obtengo los recursos del array.xml y se los paso a mi lista
+        ArrayList<String> list = new ArrayList<String>(); // me creo un array list donde voy a almacenar las opciones de mi lista
+        Resources res = getResources(); // obtener recurso
+        Collections.addAll(list, res.getStringArray(R.array.listaOpciones)); // obtengo los recursos del arrays.xml y se los paso a mi lista
  
-        
-	    // Cree el adaptador 
-	    elemento  = new ElementoListaAdaptador(this,list);
+	    elemento  = new ElementoListaAdaptador(this,list);// creo un objeto de mi lista adaptador y le paso la array con las opciones y el contexto
 	    
 	    // establesco el mi adaptador al list view
 	    listView.setAdapter(elemento);
@@ -51,7 +48,7 @@ public class AlmacenInter extends Activity {
 					int position, long id) {
 				Intent intento;
 			    // When clicked, show a toast with the TextView text
-				Toast.makeText(getApplicationContext(), "Has pulsado la opcion: "+position, Toast.LENGTH_LONG).show();
+				//Toast.makeText(getApplicationContext(), "Has pulsado la opcion: "+position, Toast.LENGTH_LONG).show();
 				switch(position)
 				{
 					case 0:
@@ -59,17 +56,14 @@ public class AlmacenInter extends Activity {
 						 startActivity(intento);
 					break;
 					case 1:
-						intento = new Intent(AlmacenInter.this,MainActivity.class);
+						intento = new Intent(AlmacenInter.this,EscribirFichero.class);
 						startActivity(intento);
 					break;
 					case 2:
 						 intento = new Intent(AlmacenInter.this,MainActivity.class);
 						 startActivity(intento);
 					break;	
-				}
-				
-				
-					
+				}	
 			}
 		});
         

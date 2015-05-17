@@ -56,7 +56,7 @@ public class MainActivity extends Activity implements
 			// Miramos que tengo un parecido mínimo
 			if (prediccion.score > 1.5) {
 				// Decimos lo que ha escrito
-				Toast.makeText(this, prediccion.name, Toast.LENGTH_SHORT).show();
+				//Toast.makeText(this, prediccion.name, Toast.LENGTH_SHORT).show();
 				if(prediccion.name.equals("Uno")){
 					Intent intent = new Intent(MainActivity.this,AlmacenInter.class);
 					startActivity(intent);
@@ -79,8 +79,7 @@ public class MainActivity extends Activity implements
 	
 			} else {
 				// Si no supera el 1.5 de fiabilidad..
-				Toast.makeText(this, "No se ha reconocido.", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(this, "No se ha reconocido la opcion.", Toast.LENGTH_SHORT).show();
 			}
 
 			// Recorremos las puntuaciones de las predicciones y las mostramos

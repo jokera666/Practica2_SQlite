@@ -48,31 +48,37 @@ public final class R {
         public static final int numeros=0x7f020002;
     }
     public static final class id {
-        public static final int OpcionCuadro=0x7f0b000e;
+        public static final int OpcionCuadro=0x7f0b0013;
         public static final int ScrollView01=0x7f0b0000;
-        public static final int action_settings=0x7f0b000f;
-        public static final int borrarTodo=0x7f0b0005;
+        public static final int action_settings=0x7f0b0014;
+        public static final int borrarTodo=0x7f0b000b;
+        public static final int contenidoFichero=0x7f0b0006;
         public static final int elementOpcion=0x7f0b0002;
-        public static final int gestureOverlayView1=0x7f0b0007;
-        public static final int imageView1=0x7f0b000a;
+        public static final int gestureOverlayView1=0x7f0b000c;
+        public static final int guardarFichero=0x7f0b0008;
+        public static final int imageView1=0x7f0b000f;
         public static final int miListView=0x7f0b0001;
-        public static final int miListViewFicheros=0x7f0b0003;
-        public static final int mostrarTexto=0x7f0b0004;
-        public static final int opcionDos=0x7f0b000c;
-        public static final int opcionTres=0x7f0b000d;
-        public static final int opcionUno=0x7f0b0009;
-        public static final int salida=0x7f0b000b;
-        public static final int tituloMenu=0x7f0b0008;
-        public static final int volver=0x7f0b0006;
+        public static final int miListViewFicheros=0x7f0b0009;
+        public static final int mostrarTexto=0x7f0b000a;
+        public static final int nombreFichero=0x7f0b0003;
+        public static final int opcionDos=0x7f0b0011;
+        public static final int opcionTres=0x7f0b0012;
+        public static final int opcionUno=0x7f0b000e;
+        public static final int salida=0x7f0b0010;
+        public static final int titulo1=0x7f0b0004;
+        public static final int titulo2=0x7f0b0005;
+        public static final int tituloMenu=0x7f0b000d;
+        public static final int volver=0x7f0b0007;
     }
     public static final class layout {
         public static final int activity_almacen_extern=0x7f030000;
         public static final int activity_almacen_inter=0x7f030001;
         public static final int activity_elementos_list_menu=0x7f030002;
-        public static final int activity_leer_fichero=0x7f030003;
-        public static final int activity_main=0x7f030004;
-        public static final int activity_media_audio=0x7f030005;
-        public static final int activity_media_video=0x7f030006;
+        public static final int activity_escribir_fichero=0x7f030003;
+        public static final int activity_leer_fichero=0x7f030004;
+        public static final int activity_main=0x7f030005;
+        public static final int activity_media_audio=0x7f030006;
+        public static final int activity_media_video=0x7f030007;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
@@ -87,6 +93,7 @@ public final class R {
         public static final int title_activity_almacen_extern=0x7f080004;
         public static final int title_activity_almacen_inter=0x7f080003;
         public static final int title_activity_elementos_list_menu=0x7f080007;
+        public static final int title_activity_escribir_fichero=0x7f080009;
         public static final int title_activity_leer_fichero=0x7f080008;
         public static final int title_activity_media_audio=0x7f080005;
         public static final int title_activity_media_video=0x7f080006;

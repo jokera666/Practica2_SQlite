@@ -34,19 +34,19 @@ import android.widget.Toast;
 public class LeerFichero extends Activity {
 	ArrayList<String> nombreFichero;
 	File[] files;
+	File fichero;
+	ListView listaFicheros;
+	TextView texto;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_leer_fichero);
 		
-	    // Array TEXTO donde guardaremos los nombres de los ficheros
-		nombreFichero = new ArrayList<String>();
-
+	   
+		nombreFichero = new ArrayList<String>();// Array TEXTO donde guardaremos los nombres de los ficheros
  
-        //Defino la ruta donde busco los ficheros
-        File fichero = new File(Environment.getExternalStorageDirectory()+"/misFicheros/");
-        //Creo el array de tipo File con el contenido de la carpeta
-        files = fichero.listFiles();
+        fichero = new File(Environment.getExternalStorageDirectory()+"/misFicheros/");//Defino la ruta donde busco los ficheros
+        files = fichero.listFiles(); //crea un vector de tipo ficheros donde los va listar
  
         //Hacemos un Loop por cada fichero para extraer el nombre de cada uno
         for (int i = 0; i < files.length; i++)
@@ -63,29 +63,31 @@ public class LeerFichero extends Activity {
             //Si es fichero...
             else
  
-            	nombreFichero.add(file.getName());
+            	nombreFichero.add(file.getName()); // obtiene el nombre del fichero
         }
-        
-        //Localizamos y llenamos la lista con el array
-        ListView listaFicheros = (ListView) findViewById(R.id.miListViewFicheros);
-        //ArrayAdapter<String> fileList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nombreFichero);
-     // Cree el adaptador 
-        ElementoListaAdaptador elemento = new ElementoListaAdaptador(this,nombreFichero);
+		
+        listaFicheros = (ListView) findViewById(R.id.miListViewFicheros); // declaramos el listview donde va listar los ficheros 
+        /*Creo un objeto de ElementoListaAdaptador donde le paso el contexto y los nombre 
+        de los ficheros donde los va a listar en el ListView*/
+        ElementoListaAdaptador elemento = new ElementoListaAdaptador(this,nombreFichero); 
         listaFicheros.setAdapter(elemento);
         
  
         // Accion para realizar al pulsar sobre un item de la lista        
         listaFicheros.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-				//Cuando pulses sobre el nombre de fichero el toast mostrar su posicion 
-				Toast.makeText(getApplicationContext(), "Posicion de fichero: "+nombreFichero.get(position), Toast.LENGTH_LONG).show();
-                //Devolvemos el resultado de la selección
-                //Intent data = new Intent();
-                //data.putExtra("filename", nombreFichero.get(position));
-                //setResult(RESULT_OK, data);
-                //finish();
-                String fichero = nombreFichero.get(position);
-                cargarTexto(fichero);
+				//Toast.makeText(getApplicationContext(), "Posicion de fichero: "+nombreFichero.get(position), Toast.LENGTH_LONG).show();//Cuando pulses sobre el nombre de fichero el toast mostrar su posicion 
+				String fichero = nombreFichero.get(position); //obtengo el nombre del fichero a partir de su posicion y se lo paso a la funcion de Leer
+	            LeerTexto(fichero);
+	            
+	            
+				//Este codigo sirvira en el caso si queremos pasar 
+				//el cotenido del item a otra actividad
+				/*Devolvemos el resultado de la selección
+                Intent data = new Intent();
+                data.putExtra("filename", nombreFichero.get(position));
+                setResult(RESULT_OK, data);
+                finish();*/
 			}
 		});
         
@@ -108,47 +110,50 @@ public class LeerFichero extends Activity {
 			@Override
 			public void onClick(View v)
 			{
-
-		        
+					
+				File[] files = fichero.listFiles();
 				try {
-			        for (int i = 0; i < files.length; i++)
-			        	 
-			        {
-			        	File file = files[i];
-			            if (!file.delete()) throw new IOException("El fichero " + files[i] + " no puede ser borrado!");
-			        }
-				} 
+				        for (int i = 0; i < files.length; i++) 
+				        {
+				        	files[i].delete();
+				        	Toast.makeText(getApplicationContext(), "Todos los ficheros fueron borrados.", Toast.LENGTH_LONG).show();
+				        	listaFicheros.setAdapter(null);
+				        	texto.setText(null);
+				        	listaFicheros.setVisibility(View.INVISIBLE);
+				        	texto.setVisibility(View.INVISIBLE);
+				        }
+
+					} 
 				
-				catch (IOException e) {
-					Toast.makeText(getApplicationContext(),"Error: "+e, Toast.LENGTH_LONG).show();
-				} // end try
+				catch (Exception e) {
+					Log.e("FILE I/O", "Error en la lectura de fichero: " +e.getMessage());
+				}
 			}
 		});
 	}
 	
-    // Inserta en el cuadro de texto el contenido del fichero
-    private void cargarTexto(String fichero){
+    
+    private void LeerTexto(String fichero){
     	// Abrir el fichero para lectura
-       	File f = new File(Environment.getExternalStorageDirectory()+"/misFicheros/"+fichero);
-       	StringBuilder text = new StringBuilder();
+       	File f = new File(Environment.getExternalStorageDirectory()+"/misFicheros/"+fichero); // obtengo el fichero con la ruta completa
+       	StringBuilder text = new StringBuilder(); // constructor de String donde concatena las lineas de String's almacenadas en el buffer
 
        	try {
-       	    BufferedReader br = new BufferedReader(new FileReader(f));
-       	    String line;
+       	    BufferedReader br = new BufferedReader(new FileReader(f)); // buffer donde alamacena el fichero leido
+       	    String line; // lineas
 
-       	    while ((line = br.readLine()) != null) {
+       	    while ((line = br.readLine()) != null) { // mientras el buffer no este vacio LEE
        	        text.append(line);
        	        text.append('\n');
        	    }
-       	    br.close();
+       	    br.close(); // cerramos el buffer
        	    
        	}
        	catch (Exception e) {
-       	    //You'll need to add proper error handling here
-       		Toast.makeText(getApplicationContext(), "Hay un error al leer el fichero.", Toast.LENGTH_LONG).show();
+       		Log.e("FILE I/O", "Error en la lectura de fichero: " +e.getMessage());
        	}
 
-       	TextView texto = (TextView)findViewById(R.id.mostrarTexto);
-   		texto.setText(text);
+       	texto = (TextView)findViewById(R.id.mostrarTexto);
+   		texto.setText(text); // inicializa en el cuadro de texto con el contenido del fichero
     }
 }

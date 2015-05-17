@@ -1,0 +1,89 @@
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/ScrollView01"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@drawable/metallica"
+  android:scrollbars="horizontal" >
+
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="500dp"
+	    tools:context="${relativePackage}.${activityClass}" >
+
+		<EditText
+		    android:id="@+id/nombreFichero"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:inputType="text"
+		    android:background="#DDFFFFFF"
+		    android:textSize="20sp"
+		    android:layout_below="@+id/titulo1"
+		    android:ems="10" />
+
+		<TextView
+		    android:id="@+id/titulo2"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/titulo1"
+		    android:layout_below="@+id/nombreFichero"
+		    android:layout_marginTop="17dp"
+		    android:background="#EE000000"
+		    android:text="Contenido del fichero"
+		    android:textColor="#00FF00"
+		    android:textSize="30sp"
+		    android:textStyle="bold" />
+
+		<EditText
+		    android:id="@+id/contenidoFichero"
+		    android:layout_width="match_parent"
+		    android:layout_height="120dp"
+		    android:inputType="textMultiLine"
+		    android:layout_below="@+id/titulo2"
+		    android:layout_centerHorizontal="true"
+		    android:layout_marginTop="20dp"
+		    android:background="#DDFFFFFF"
+		    android:textSize="20sp"
+		    android:ems="10" />
+
+		<TextView
+		    android:id="@+id/titulo1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentTop="true"
+		    android:layout_centerHorizontal="true"
+		    android:background="#EE000000"
+		    android:text="Nombre del fichero"
+		    android:textColor="#00FF00"
+		    android:textSize="30sp"
+		    android:textStyle="bold" />
+
+		<Button
+		    android:id="@+id/volver"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignBottom="@+id/guardarFichero"
+		    android:layout_marginLeft="36dp"
+		    android:layout_toRightOf="@+id/guardarFichero"
+		    android:textColor="#00FF00"
+	        android:textStyle="bold"
+	        android:textSize="25sp"
+		    android:text="Volver" />
+
+		<Button
+		    android:id="@+id/guardarFichero"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/titulo2"
+		    android:layout_below="@+id/contenidoFichero"
+		    android:layout_marginTop="22dp"
+		    android:text="Guardar"
+		    android:textColor="#00FF00"
+		    android:textSize="25sp"
+		    android:textStyle="bold" />
+
+	</RelativeLayout>
+
+</ScrollView>

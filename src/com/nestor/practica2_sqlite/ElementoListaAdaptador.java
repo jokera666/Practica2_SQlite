@@ -1,25 +1,23 @@
 
 package com.nestor.practica2_sqlite;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Vector;
+
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import com.nestor.practica2_sqlite.R;
 
-public class ElementoListaAdaptador extends BaseAdapter {
+
+public class ElementoListaAdaptador extends BaseAdapter {// Clase Adaptadora que hereda de BaseAdapter
 	private Context mContext;
 	private ArrayList<String> lista;
 	
-	 public ElementoListaAdaptador(Context context,ArrayList<String> array) 
+	 public ElementoListaAdaptador(Context context,ArrayList<String> array)  // constructor de mi clase
 	    {
 	            super();
 	            mContext=context;
@@ -34,23 +32,20 @@ public class ElementoListaAdaptador extends BaseAdapter {
 
        
 
-    // getView method is called for each item of ListView
+	// metodo getView llamado para cada item de ListView
     public View getView(int position,  View view, ViewGroup parent) 
     {
         
-        // inflate the layout for each item of listView
+    	//inflar el layout para cada item del ListView
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.activity_elementos_list_menu, null);
         
-        // get the reference of textViews
+        //obtiene la refenrecia de cada opcion y la asigna a in textView
         TextView nombre =(TextView)view.findViewById(R.id.elementOpcion);
 
-
-        
-    	// Set the Sender number and smsBody to respective TextViews
+        //establece el contenido al textview a apartir de la posicion de la array
         nombre.setText(lista.get(position));
-    
-    	
+        
         return view;
     }
 
