@@ -1,11 +1,15 @@
 package com.nestor.practica2_sqlite;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
-public class DataHelper {//mi clase adaptadora para definir y crear la base de datos
+public class DataHelper{//mi clase adaptadora para definir y crear la base de datos
 	private static final String NOMBRE_BD = "bdPeliculas.db";
 	private static final int VERSION_BD = 1;
 	private static final String TABLA_NOMBRE_PELICULAS ="peliculas";
@@ -30,9 +34,9 @@ public class DataHelper {//mi clase adaptadora para definir y crear la base de d
 																								   	+ATRIBUTOS_PELICULAS[7]+" text,"
 																								   	+ATRIBUTOS_PELICULAS[8]+" float,"
 																								   	+ATRIBUTOS_PELICULAS[9]+" text,"
-																								   	+ATRIBUTOS_PELICULAS[10]+" text )";
+																								   	+ATRIBUTOS_PELICULAS[10]+" text );";
 	//propiedad para insertar una pelicula para lanzarla al compileStatemant
-	private static final String INSERT = "INSERT INTO"+TABLA_NOMBRE_PELICULAS+"( "+ATRIBUTOS_PELICULAS[1]+","
+	private static final String INSERT = "INSERT INTO "+TABLA_NOMBRE_PELICULAS+"( "+ATRIBUTOS_PELICULAS[1]+","
 																				  +ATRIBUTOS_PELICULAS[2]+","
 																				  +ATRIBUTOS_PELICULAS[3]+","
 																				  +ATRIBUTOS_PELICULAS[4]+","
@@ -42,7 +46,7 @@ public class DataHelper {//mi clase adaptadora para definir y crear la base de d
 																				  +ATRIBUTOS_PELICULAS[8]+","
 																				  +ATRIBUTOS_PELICULAS[9]+","
 																				  +ATRIBUTOS_PELICULAS[10]+")"
-																				  +" VALUES (?,?,?,?,?,?,?,?,?,?)";
+																				  +" VALUES (?,?,?,?,?,?,?,?,?,?);";
 	// propiedades para preparar y atacar la base de datos
 	private Context contexto;
 	private SQLiteDatabase db;
@@ -56,8 +60,8 @@ public class DataHelper {//mi clase adaptadora para definir y crear la base de d
 		this.statemantInsertar = this.db.compileStatement(INSERT);
 	}
 	
-	public class MiOpenHelper extends SQLiteOpenHelper{
-		
+	public class MiOpenHelper extends SQLiteOpenHelper
+	{	
 		//constructor por defecto de miOpenHelper
 			public MiOpenHelper(Context context){
 			super(context,NOMBRE_BD,null,VERSION_BD);// le paso en contexto, el nombre de la BD, el cursor null y la version de la BD
@@ -73,11 +77,53 @@ public class DataHelper {//mi clase adaptadora para definir y crear la base de d
 		db.execSQL("DROP TABLE si existe la tabla " + NOMBRE_BD);
 		onCreate(db); //Eliminamos si existe y la volvemos a crear
 		}
+	}
 		
 		
 		//AQUI YA EMPEZAMOS A CREAR NUESTROS PROPIOS METODOS PARA ATACAR A LA BASE DE DATOS
+		public long insertar(String genero, String titulo, String director, String idioma, String fecha_ini, String fecha_fin, String prestado_a, double valoracion, String formato, String notas)
+		{
+			statemantInsertar.bindString(1,genero);
+			statemantInsertar.bindString(2,titulo);
+			statemantInsertar.bindString(3,director);
+			statemantInsertar.bindString(4,idioma);
+			statemantInsertar.bindString(5,fecha_ini);
+			statemantInsertar.bindString(6,fecha_fin);
+			statemantInsertar.bindString(7,prestado_a);
+			statemantInsertar.bindDouble(8,valoracion);
+			statemantInsertar.bindString(9,formato);
+			statemantInsertar.bindString(10,notas);
+			
+			return statemantInsertar.executeInsert();
+		}
 		
-	}
-																											
-
+		public List<String> mostrarTodo()
+		{
+			List<String> lista = new ArrayList<String>();
+			String atributos[] = new String[]{"genero","titulo","director","idioma","fecha_ini_prestamo","fecha_fin_prestamo","prestado_a","valoracion","formato","notas"};
+			Cursor rs = db.query(TABLA_NOMBRE_PELICULAS, atributos, null, null, null, null,null);
+			if ( rs.moveToFirst() )
+			{
+				do
+				{
+					lista.add(rs.getString(1)); //El 1º parám. es el genero
+					lista.add(rs.getString(2)); //El 2º parám. es el titulo
+					lista.add(rs.getString(3)); //El 3º parám. es el director
+					lista.add(rs.getString(4)); //El 4º parám. es el idioma
+					lista.add(rs.getString(5)); //El 5º parám. es el fecha_ini_prestamo
+					lista.add(rs.getString(6)); //El 6º parám. es el fecha_fin_prestamo
+					lista.add(rs.getString(7)); //El 7º parám. es el prestado_a
+					lista.add(rs.getString(8)); //El 8º parám. es el valoracion
+					lista.add(rs.getString(9)); //El 9º parám. es el formato
+					lista.add(rs.getString(10)); //El 10º parám. es el notas
+				}while (rs.moveToNext());
+			}
+			
+			if ( rs!= null && !rs.isClosed() )
+			{
+				rs.close();
+			}
+			
+			return lista;
+		}	
 }
