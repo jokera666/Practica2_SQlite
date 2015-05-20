@@ -49,7 +49,7 @@ public final class R {
     }
     public static final class id {
         public static final int OpcionCuadro=0x7f0b0014;
-        public static final int ScrollView01=0x7f0b0001;
+        public static final int ScrollView01=0x7f0b0000;
         public static final int action_settings=0x7f0b0015;
         public static final int borrarTodo=0x7f0b000c;
         public static final int contenidoFichero=0x7f0b0007;
@@ -65,7 +65,7 @@ public final class R {
         public static final int opcionTres=0x7f0b0013;
         public static final int opcionUno=0x7f0b000f;
         public static final int salida=0x7f0b0011;
-        public static final int select=0x7f0b0000;
+        public static final int select=0x7f0b0001;
         public static final int titulo1=0x7f0b0005;
         public static final int titulo2=0x7f0b0006;
         public static final int tituloMenu=0x7f0b000e;

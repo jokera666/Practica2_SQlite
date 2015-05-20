@@ -32,7 +32,7 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 																								   	+ATRIBUTOS_PELICULAS[5]+" text,"
 																								   	+ATRIBUTOS_PELICULAS[6]+" text,"
 																								   	+ATRIBUTOS_PELICULAS[7]+" text,"
-																								   	+ATRIBUTOS_PELICULAS[8]+" float,"
+																								   	+ATRIBUTOS_PELICULAS[8]+" double,"
 																								   	+ATRIBUTOS_PELICULAS[9]+" text,"
 																								   	+ATRIBUTOS_PELICULAS[10]+" text );";
 	//propiedad para insertar una pelicula para lanzarla al compileStatemant
@@ -57,7 +57,8 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 		this.contexto = context;
 		MiOpenHelper openHelper = new MiOpenHelper(this.contexto);
 		this.db = openHelper.getWritableDatabase();
-		this.statemantInsertar = this.db.compileStatement(INSERT);
+		this.statemantInsertar = this.db.compileStatement(INSERT); // es lo mismo db.execSQL(INSERT);
+		
 	}
 	
 	public class MiOpenHelper extends SQLiteOpenHelper
@@ -100,12 +101,13 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 		public List<String> mostrarTodo()
 		{
 			List<String> lista = new ArrayList<String>();
-			String atributos[] = new String[]{"genero","titulo","director","idioma","fecha_ini_prestamo","fecha_fin_prestamo","prestado_a","valoracion","formato","notas"};
-			Cursor rs = db.query(TABLA_NOMBRE_PELICULAS, atributos, null, null, null, null,null);
+			//String atributos[] = new String[]{"genero","titulo","director","idioma","fecha_ini_prestamo","fecha_fin_prestamo","prestado_a","valoracion","formato","notas"};
+			Cursor rs = db.query(TABLA_NOMBRE_PELICULAS, ATRIBUTOS_PELICULAS, null, null, null, null,null);
 			if ( rs.moveToFirst() )
 			{
 				do
 				{
+					lista.add(rs.getString(0)); //El 0º param es el ID
 					lista.add(rs.getString(1)); //El 1º parám. es el genero
 					lista.add(rs.getString(2)); //El 2º parám. es el titulo
 					lista.add(rs.getString(3)); //El 3º parám. es el director

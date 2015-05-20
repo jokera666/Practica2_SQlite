@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AlmacenExtern extends Activity {
 
@@ -19,6 +20,12 @@ public class AlmacenExtern extends Activity {
 		DataHelper dh = new DataHelper(this); // this es igual a getApplicationContext()
 		dh.insertar("hola1","hola2","hola2","hola2","hola2","hola2","hola2",5.555,"hola2","hola2");
 		List<String> selectTodo = dh.mostrarTodo();
+		
+	    //Si no hay registros mostramos un aviso
+	    if (selectTodo.isEmpty())
+	    {
+	    	Toast.makeText(getBaseContext(), "No se han encontrado registros", Toast.LENGTH_LONG).show();
+	    }
 		
 		TextView selectView = (TextView) findViewById(R.id.select);
 				
