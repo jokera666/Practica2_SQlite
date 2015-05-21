@@ -24,7 +24,7 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 														 "valoracion",		  // [8]
 														 "formato",			  // [9]	
 														 "notas"};			  //[10]
-	private static final String CREAR_TABLA_PELICULAS = "CREATE TABLE "+TABLA_NOMBRE_PELICULAS+" ( "+ATRIBUTOS_PELICULAS[0]+" integer primary key autoincrement,"
+	private static final String CREAR_TABLA_PELICULAS = "CREATE TABLE "+TABLA_NOMBRE_PELICULAS+" ( "+ATRIBUTOS_PELICULAS[0]+" long primary key autoincrement,"
 																								   	+ATRIBUTOS_PELICULAS[1]+" text not null,"
 																								   	+ATRIBUTOS_PELICULAS[2]+" text not null,"
 																								   	+ATRIBUTOS_PELICULAS[3]+" text not null,"
@@ -47,17 +47,20 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 																				  +ATRIBUTOS_PELICULAS[9]+","
 																				  +ATRIBUTOS_PELICULAS[10]+")"
 																				  +" VALUES (?,?,?,?,?,?,?,?,?,?);";
+	private static final String UPDATE = "UPDATE "+TABLA_NOMBRE_PELICULAS+" SET "+ATRIBUTOS_PELICULAS[1]+"= ? WHERE "+ATRIBUTOS_PELICULAS[0]+"=?";
 	// propiedades para preparar y atacar la base de datos
 	private Context contexto;
 	private SQLiteDatabase db;
 	private SQLiteStatement statemantInsertar;
+	private SQLiteStatement statemantModificar;
 
 	//Constructor por defecto del adaptador dataHelper
 	public DataHelper (Context context){ // hay que pasarle el contexto de la clase donde se crea el objeto
 		this.contexto = context;
 		MiOpenHelper openHelper = new MiOpenHelper(this.contexto);
 		this.db = openHelper.getWritableDatabase();
-		this.statemantInsertar = this.db.compileStatement(INSERT); // es lo mismo db.execSQL(INSERT);
+		this.statemantInsertar = this.db.compileStatement(INSERT); // es lo mismo db.execSQL(INSERT); // compara el insert
+		this.statemantModificar = this.db.compileStatement(UPDATE); // es lo mismo db.execSQL(UPDATE);
 		
 	}
 	
@@ -79,6 +82,11 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 		onCreate(db); //Eliminamos si existe y la volvemos a crear
 		}
 	}
+	
+	public int borrarTodo()
+	{
+		return db.delete(TABLA_NOMBRE_PELICULAS, null, null);
+	}
 		
 		
 		//AQUI YA EMPEZAMOS A CREAR NUESTROS PROPIOS METODOS PARA ATACAR A LA BASE DE DATOS
@@ -96,6 +104,13 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 			statemantInsertar.bindString(10,notas);
 			
 			return statemantInsertar.executeInsert();
+		}
+		
+		public long modificar(String newGenero, long id)
+		{
+			statemantModificar.bindString(1, newGenero); // los 1, 2 son el ? que se pasan en la en la preparacion del statement de las propiedades
+			statemantModificar.bindLong(2, id);
+			return statemantInsertar.executeUpdateDelete();
 		}
 		
 		public List<String> mostrarTodo()
