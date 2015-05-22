@@ -51,7 +51,7 @@ public final class R {
         public static final int OpcionCuadro=0x7f0b002a;
         public static final int ScrollView01=0x7f0b0000;
         public static final int action_settings=0x7f0b002b;
-        public static final int barraRango=0x7f0b0012;
+        public static final int barraRango=0x7f0b0015;
         public static final int borrarTodo=0x7f0b0022;
         public static final int btnFechaFin=0x7f0b0010;
         public static final int btnFechaIni=0x7f0b000d;
@@ -59,8 +59,8 @@ public final class R {
         public static final int btnVolver=0x7f0b0017;
         public static final int contenidoFichero=0x7f0b001d;
         public static final int editDirector=0x7f0b0006;
-        public static final int editNotas=0x7f0b0015;
-        public static final int editPrestado=0x7f0b0014;
+        public static final int editNotas=0x7f0b0013;
+        public static final int editPrestado=0x7f0b0012;
         public static final int editTitulo=0x7f0b0004;
         public static final int elementOpcion=0x7f0b0019;
         public static final int fechaFin=0x7f0b000f;
@@ -85,9 +85,9 @@ public final class R {
         public static final int titFormato=0x7f0b0009;
         public static final int titGenero=0x7f0b0001;
         public static final int titIdioma=0x7f0b0007;
-        public static final int titPestado=0x7f0b0013;
+        public static final int titPestado=0x7f0b0011;
         public static final int titTitulo=0x7f0b0003;
-        public static final int titValoracion=0x7f0b0011;
+        public static final int titValoracion=0x7f0b0014;
         public static final int titulo1=0x7f0b001b;
         public static final int titulo2=0x7f0b001c;
         public static final int tituloMenu=0x7f0b0024;

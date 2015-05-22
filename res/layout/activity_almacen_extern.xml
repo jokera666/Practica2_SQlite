@@ -7,9 +7,14 @@
   android:background="@drawable/metallica"
   android:scrollbars="horizontal" >
 
+	<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    
 	<TableLayout 
 	    android:layout_width="match_parent"
-	    android:layout_height="600dp"
+	    android:layout_height="wrap_content"
 	    tools:context="${relativePackage}.${activityClass}"
 	    android:shrinkColumns="1"
     	android:stretchColumns="1" >
@@ -148,7 +153,7 @@
 	             android:id="@+id/fechaIni"
 	             android:layout_width="match_parent"
 	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_vertical"
+	             android:layout_gravity="center_horizontal"
 	             android:layout_weight="4"
 	             android:textColor="#00FF00"
 	             android:textSize="20sp"
@@ -161,7 +166,7 @@
 	             android:layout_gravity="center_vertical"
 	             android:layout_weight="1"
 	             android:textColor="#00FF00"
-	             android:textSize="13sp"
+	             android:textSize="20sp"
 	             android:text="Fecha inicio"
 	             android:textStyle="bold" />
 		</TableRow>
@@ -182,7 +187,7 @@
 	             android:id="@+id/fechaFin"
 	             android:layout_width="match_parent"
 	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_vertical"
+	             android:layout_gravity="center_horizontal"
 	             android:layout_weight="1"
 	             android:textColor="#00FF00"
 	             android:textSize="20sp"
@@ -195,35 +200,14 @@
 	             android:layout_gravity="center_vertical"
 	             android:layout_weight="4"
 	             android:textColor="#00FF00"
-	             android:textSize="13sp"
+	             android:textSize="20sp"
 	             android:text="Fecha fin"
 	             android:textStyle="bold" />
 		</TableRow>
 						
-	  	<TableRow android:layout_marginBottom="15dp" >
-	         <TextView
-	             android:id="@+id/titValoracion"
-	             android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_vertical"
-	             android:layout_weight="1"
-	             android:text="Valoracion"
-	             android:textColor="#00FF00"
-	             android:textSize="20sp"
-	             android:textStyle="bold" />
-		</TableRow>
+	  
+
 		
-		<TableRow>     
-	        <RatingBar
-	            android:id="@+id/barraRango"
-	            style="?android:attr/ratingBarStyleIndicator"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:isIndicator="false"
-	            android:max="5"
-	            android:numStars="5"
-	            android:stepSize="1" />
-		</TableRow>
 				
 	  	<TableRow android:layout_marginBottom="15dp" >
 	         <TextView
@@ -247,7 +231,7 @@
 			    android:background="#DDD3D3D3" />
 		</TableRow>
 						
-	  	<TableRow android:layout_marginBottom="15dp" >
+	  	<TableRow android:layout_marginBottom="15dp">
 			<EditText
 			    android:id="@+id/editNotas"
 			    android:layout_width="match_parent"
@@ -259,26 +243,52 @@
 			    android:background="#DDD3D3D3" />
 		</TableRow>
 		
-		<Button
-	  	    android:id="@+id/btnGuardar"
-	  	    android:layout_width="match_parent"
-	  	    android:layout_height="wrap_content"
-	  	    android:layout_weight="1"
-	  	    android:layout_marginBottom="15dp"
-	  	    android:text="Guardar"
-	  	    android:textColor="#00FF00"
-	  	    android:textSize="25sp"
-	  	    android:textStyle="bold" />
 
-	   	<Button
-	             android:id="@+id/btnVolver"
-	             android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_vertical"
-	             android:layout_weight="1"
-	             android:textColor="#00FF00"
-	             android:textSize="25sp"
-	             android:text="Volver"
-	             android:textStyle="bold" />
-	</TableLayout>	
+		
+		</TableLayout>	
+
+			<TextView
+			    android:id="@+id/titValoracion"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center_horizontal"
+			    android:text="Valoracion"
+			    android:textColor="#00FF00"
+			    android:textSize="20sp"
+			    android:textStyle="bold" />
+	
+	        <RatingBar
+	            android:id="@+id/barraRango"
+	            style="?android:attr/ratingBarStyleIndicator"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="20dp"
+	            android:isIndicator="false"
+	            android:layout_gravity="center_horizontal"
+	            android:max="5"
+	            android:numStars="5"
+	            android:stepSize="1" />
+		
+		<Button
+		    android:id="@+id/btnGuardar"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_horizontal"
+		    android:layout_marginBottom="15dp"
+		    android:text="Guardar"
+		    android:textColor="#00FF00"
+		    android:textSize="25sp"
+		    android:textStyle="bold" />
+
+		<Button
+		    android:id="@+id/btnVolver"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_horizontal"
+		    android:text="Volver"
+		    android:textColor="#00FF00"
+		    android:textSize="25sp"
+		    android:textStyle="bold" />
+
+	   	</LinearLayout>
  </ScrollView>

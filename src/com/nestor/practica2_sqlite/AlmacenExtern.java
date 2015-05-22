@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,13 +33,17 @@ public class AlmacenExtern extends Activity {
 	TextView fecha_fin;
 	Button btnFecha_ini;
 	Button btnFecha_fin;
-	
 	private int mYear, mMonth, mDay;
+	
+	EditText titulo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_almacen_extern);
+		
+		//titulo = (EditText)findViewById(R.id.editTitulo);
+		//titulo.setText("Hola");
 		
 		spinGenero = (Spinner)findViewById(R.id.spinGenero);
 		// Crear ArrayAdapter usando un string de array y el spinner layout por defecto
@@ -66,9 +71,8 @@ public class AlmacenExtern extends Activity {
 		
 		
 		
-		TextView fecha_fin = (TextView) findViewById(R.id.titFechafin);
 		
-		Button btnFecha_fin = (Button) findViewById(R.id.btnFechaFin);
+		
 		
 		Button btnFecha_ini = (Button) findViewById(R.id.btnFechaIni);
         btnFecha_ini.setOnClickListener(new View.OnClickListener() 
@@ -77,34 +81,61 @@ public class AlmacenExtern extends Activity {
 			@Override
 			public void onClick(View v)
 			{
-				
-			    switch (v.getId()) {
-		         case R.id.btnFechaIni:
-		        	 
-		         // Process to get Current Date
+					        	 
+		         // Obtener la fecha a partider de un DatePicker e mostrarlo en un textView
 			  final Calendar c = Calendar.getInstance();
 			  mYear = c.get(Calendar.YEAR);
 			  mMonth = c.get(Calendar.MONTH);
 			  mDay = c.get(Calendar.DAY_OF_MONTH);
 		 
 			  // Lanzar Date Picker Dialog
-			  DatePickerDialog dpd = new DatePickerDialog(AlmacenExtern.this,
-			     new DatePickerDialog.OnDateSetListener() {
+			  DatePickerDialog dpd = new DatePickerDialog(AlmacenExtern.this, new DatePickerDialog.OnDateSetListener() {
 		 
 			        @Override
 			        public void onDateSet(DatePicker view, int year,
 			           int monthOfYear, int dayOfMonth) {
-		                     // Setear valor en editText
+		                     
 			        	TextView fecha_ini = (TextView) findViewById(R.id.fechaIni);
-				       fecha_ini.setText(dayOfMonth + "-"
-					   + (monthOfYear + 1) + "-" + year);
+				       fecha_ini.setText(dayOfMonth + "/"+ (monthOfYear + 1) + "/" + year);
 				    }
 			        }, mYear, mMonth, mDay);
 				    dpd.show();
-				    break;
-			    }
 			}
 		});
+        
+        
+        
+		
+        Button btnFecha_fin = (Button) findViewById(R.id.btnFechaFin);
+        btnFecha_fin.setOnClickListener(new View.OnClickListener() 
+        {
+			
+			@Override
+			public void onClick(View v)
+			{
+					        	 
+		         // Obtener la fecha a partider de un DatePicker e mostrarlo en un textView
+			  final Calendar c = Calendar.getInstance();
+			  mYear = c.get(Calendar.YEAR);
+			  mMonth = c.get(Calendar.MONTH);
+			  mDay = c.get(Calendar.DAY_OF_MONTH);
+		 
+			  // Lanzar Date Picker Dialog
+			  DatePickerDialog dpd = new DatePickerDialog(AlmacenExtern.this, new DatePickerDialog.OnDateSetListener() {
+		 
+			        @Override
+			        public void onDateSet(DatePicker view, int year,
+			           int monthOfYear, int dayOfMonth) {
+		                     
+			        	TextView fecha_fin = (TextView) findViewById(R.id.fechaFin);
+				       fecha_fin.setText(dayOfMonth + "/"+ (monthOfYear + 1) + "/" + year);
+				    }
+			        }, mYear, mMonth, mDay);
+				    dpd.show();
+			}
+		});
+        
+        
 		
 		DataHelper dh = new DataHelper(this); // this es igual a getApplicationContext()
 		dh.insertar("hola1","hola2","hola3","hola4","hola5","hola6","hola7",5.555,"hola9","hola10");
