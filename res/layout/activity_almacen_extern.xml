@@ -10,242 +10,234 @@
 	<LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    tools:context="${relativePackage}.${activityClass}"
     android:orientation="vertical">
     
-	<TableLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    tools:context="${relativePackage}.${activityClass}"
-	    android:shrinkColumns="1"
-    	android:stretchColumns="1" >
-		<!-- shrinkColumns=1 y stretchColumns=1 son para ajustar el rango de estrellas -->
-	    <!-- <TextView
-	        android:id="@+id/select"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="40dp"
-	        android:textColor="#00FF00"
-	        android:layout_marginTop="39dp" /> -->
-	     
-	     <TableRow android:layout_marginBottom="15dp">
-	         <TextView
-	             android:id="@+id/titGenero"
-	             android:layout_width="match_parent"
-	             android:layout_height="50dp"
-	             android:layout_gravity="center_vertical"
-	             android:layout_weight="1"
-	             android:text="Genero"
-	             android:textColor="#00FF00"
-	             android:textSize="20sp"
-	             android:textStyle="bold" />
-	
-			<Spinner
-			    android:id="@+id/spinGenero"
-			    android:layout_width="match_parent"
-			    android:layout_height="50dp"
-			    android:layout_weight="4"
-			    android:layout_gravity="center_vertical"
-			    android:background="#DDD3D3D3" />
-		</TableRow>
+		<TableLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:shrinkColumns="1"
+	    	android:stretchColumns="1" >
+			<!-- shrinkColumns=1 y stretchColumns=1 son para ajustar el rango de estrellas -->
+		    <!-- <TextView
+		        android:id="@+id/select"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="40dp"
+		        android:textColor="#00FF00"
+		        android:layout_marginTop="39dp" /> -->
+		     
+		     <TableRow android:layout_marginBottom="15dp">
+		         <TextView
+		             android:id="@+id/titGenero"
+		             android:layout_width="match_parent"
+		             android:layout_height="50dp"
+		             android:layout_gravity="center_vertical"
+		             android:layout_weight="1"
+		             android:text="Genero"
+		             android:textColor="#00FF00"
+		             android:textSize="20sp"
+		             android:textStyle="bold" />
 		
-	    <TableRow android:layout_marginBottom="15dp" >
-	         <TextView
-	             android:id="@+id/titTitulo"
-	             android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_vertical"
-	             android:layout_weight="1"
-	             android:text="Titulo"
-	             android:textColor="#00FF00"
-	             android:textSize="20sp"
-	             android:textStyle="bold" />
-	
-			<EditText
-			    android:id="@+id/editTitulo"
-			    android:layout_width="match_parent"
-			    android:layout_height="30dp"
-			    android:layout_weight="4"
-			    android:textSize="20sp"
-			    android:layout_gravity="center_vertical"
-			    android:background="#DDD3D3D3" />
-		</TableRow>
+				<Spinner
+				    android:id="@+id/spinGenero"
+				    android:layout_width="match_parent"
+				    android:layout_height="50dp"
+				    android:layout_weight="4"
+				    android:layout_gravity="center_vertical"
+				    android:background="#DDD3D3D3" />
+			</TableRow>
+			
+		    <TableRow android:layout_marginBottom="15dp" >
+		         <TextView
+		             android:id="@+id/titTitulo"
+		             android:layout_width="match_parent"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_vertical"
+		             android:layout_weight="1"
+		             android:text="Titulo"
+		             android:textColor="#00FF00"
+		             android:textSize="20sp"
+		             android:textStyle="bold" />
 		
-	  	<TableRow android:layout_marginBottom="15dp" >
-	         <TextView
-	             android:id="@+id/titDirector"
-	             android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_vertical"
-	             android:layout_weight="1"
-	             android:text="Director"
-	             android:textColor="#00FF00"
-	             android:textSize="20sp"
-	             android:textStyle="bold" />
-	
-			<EditText
-			    android:id="@+id/editDirector"
-			    android:layout_width="match_parent"
-			    android:layout_height="30dp"
-			    android:layout_weight="4"
-			    android:textSize="20sp"
-			    android:layout_gravity="center_vertical"
-			    android:background="#DDD3D3D3" />
-		</TableRow>
+				<EditText
+				    android:id="@+id/editTitulo"
+				    android:layout_width="match_parent"
+				    android:layout_height="30dp"
+				    android:layout_weight="4"
+				    android:textSize="20sp"
+				    android:layout_gravity="center_vertical"
+				    android:background="#DDD3D3D3" />
+			</TableRow>
+			
+		  	<TableRow android:layout_marginBottom="15dp" >
+		         <TextView
+		             android:id="@+id/titDirector"
+		             android:layout_width="match_parent"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_vertical"
+		             android:layout_weight="1"
+		             android:text="Director"
+		             android:textColor="#00FF00"
+		             android:textSize="20sp"
+		             android:textStyle="bold" />
 		
-	  	<TableRow android:layout_marginBottom="15dp" >
-	         <TextView
-	             android:id="@+id/titIdioma"
-	             android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_vertical"
-	             android:layout_weight="1"
-	             android:text="Idioma"
-	             android:textColor="#00FF00"
-	             android:textSize="20sp"
-	             android:textStyle="bold" />
-	
-			<Spinner
-			    android:id="@+id/spinIdioma"
-			    android:layout_width="match_parent"
-			    android:layout_height="50dp"
-			    android:layout_weight="4"
-			    android:layout_gravity="center_vertical"
-			    android:background="#DDD3D3D3" />
-		</TableRow>
-				
-	  	<TableRow android:layout_marginBottom="15dp" >
-	         <TextView
-	             android:id="@+id/titFormato"
-	             android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_vertical"
-	             android:layout_weight="1"
-	             android:text="Formato"
-	             android:textColor="#00FF00"
-	             android:textSize="20sp"
-	             android:textStyle="bold" />
-	
-			<Spinner
-			    android:id="@+id/spinFormato"
-			    android:layout_width="match_parent"
-			    android:layout_height="50dp"
-			    android:layout_weight="4"
-			    android:layout_gravity="center_vertical"
-			    android:background="#DDD3D3D3" />
-		</TableRow>
+				<EditText
+				    android:id="@+id/editDirector"
+				    android:layout_width="match_parent"
+				    android:layout_height="30dp"
+				    android:layout_weight="4"
+				    android:textSize="20sp"
+				    android:layout_gravity="center_vertical"
+				    android:background="#DDD3D3D3" />
+			</TableRow>
+			
+		  	<TableRow android:layout_marginBottom="15dp" >
+		         <TextView
+		             android:id="@+id/titIdioma"
+		             android:layout_width="match_parent"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_vertical"
+		             android:layout_weight="1"
+		             android:text="Idioma"
+		             android:textColor="#00FF00"
+		             android:textSize="20sp"
+		             android:textStyle="bold" />
 		
-	  					
-
+				<Spinner
+				    android:id="@+id/spinIdioma"
+				    android:layout_width="match_parent"
+				    android:layout_height="50dp"
+				    android:layout_weight="4"
+				    android:layout_gravity="center_vertical"
+				    android:background="#DDD3D3D3" />
+			</TableRow>
+					
+		  	<TableRow android:layout_marginBottom="15dp" >
+		         <TextView
+		             android:id="@+id/titFormato"
+		             android:layout_width="match_parent"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_vertical"
+		             android:layout_weight="1"
+		             android:text="Formato"
+		             android:textColor="#00FF00"
+		             android:textSize="20sp"
+		             android:textStyle="bold" />
 		
-	  	<TableRow android:layout_marginBottom="15dp" >
-	         <TextView
-	             android:id="@+id/titFechaini"
-	             android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_vertical"
-	             android:layout_weight="0"
-	             android:text="Fecha inicio"
-	             android:textColor="#00FF00"
-	             android:textSize="20sp"
-	             android:textStyle="bold" />
-	         
-	       	<TextView
-	             android:id="@+id/fechaIni"
-	             android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_horizontal"
-	             android:layout_weight="4"
-	             android:textColor="#00FF00"
-	             android:textSize="20sp"
-	             android:textStyle="bold" />
-	       	
-	       	<Button
-	             android:id="@+id/btnFechaIni"
-	             android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_vertical"
-	             android:layout_weight="1"
-	             android:textColor="#00FF00"
-	             android:textSize="20sp"
-	             android:text="Fecha inicio"
-	             android:textStyle="bold" />
-		</TableRow>
-				
-	  	<TableRow android:layout_marginBottom="15dp" >
-	         <TextView
-	             android:id="@+id/titFechafin"
-	             android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_vertical"
-	             android:layout_weight="1"
-	             android:text="Fecha Fin"
-	             android:textColor="#00FF00"
-	             android:textSize="20sp"
-	             android:textStyle="bold" />
-	         
-	       	<TextView
-	             android:id="@+id/fechaFin"
-	             android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_horizontal"
-	             android:layout_weight="1"
-	             android:textColor="#00FF00"
-	             android:textSize="20sp"
-	             android:textStyle="bold" />
-	       	
-	       	<Button
-	             android:id="@+id/btnFechaFin"
-	             android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_vertical"
-	             android:layout_weight="4"
-	             android:textColor="#00FF00"
-	             android:textSize="20sp"
-	             android:text="Fecha fin"
-	             android:textStyle="bold" />
-		</TableRow>
-						
-	  
-
-		
-				
-	  	<TableRow android:layout_marginBottom="15dp" >
-	         <TextView
-	             android:id="@+id/titPestado"
-	             android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:layout_gravity="center_vertical"
-	             android:layout_weight="1"
-	             android:text="Prestado a:"
-	             android:textColor="#00FF00"
-	             android:textSize="20sp"
-	             android:textStyle="bold" />
+				<Spinner
+				    android:id="@+id/spinFormato"
+				    android:layout_width="match_parent"
+				    android:layout_height="50dp"
+				    android:layout_weight="4"
+				    android:layout_gravity="center_vertical"
+				    android:background="#DDD3D3D3" />
+			</TableRow>
+			
+		  					
 	
-			<EditText
-			    android:id="@+id/editPrestado"
-			    android:layout_width="match_parent"
-			    android:layout_height="30dp"
-			    android:layout_weight="4"
-			    android:textSize="20sp"
-			    android:layout_gravity="center_vertical"
-			    android:background="#DDD3D3D3" />
-		</TableRow>
-						
-	  	<TableRow android:layout_marginBottom="15dp">
+			
+		  	<TableRow android:layout_marginBottom="15dp" >
+		         <TextView
+		             android:id="@+id/titFechaini"
+		             android:layout_width="match_parent"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_vertical"
+		             android:layout_weight="0"
+		             android:text="Fecha inicio"
+		             android:textColor="#00FF00"
+		             android:textSize="20sp"
+		             android:textStyle="bold" />
+		         
+		       	<TextView
+		             android:id="@+id/fechaIni"
+		             android:layout_width="match_parent"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_horizontal"
+		             android:layout_weight="4"
+		             android:textColor="#00FF00"
+		             android:textSize="20sp"
+		             android:textStyle="bold" />
+		       	
+		       	<Button
+		             android:id="@+id/btnFechaIni"
+		             android:layout_width="match_parent"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_vertical"
+		             android:layout_weight="1"
+		             android:textColor="#00FF00"
+		             android:textSize="20sp"
+		             android:text="Fecha inicio"
+		             android:textStyle="bold" />
+			</TableRow>
+					
+		  	<TableRow android:layout_marginBottom="15dp" >
+		         <TextView
+		             android:id="@+id/titFechafin"
+		             android:layout_width="match_parent"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_vertical"
+		             android:layout_weight="1"
+		             android:text="Fecha Fin"
+		             android:textColor="#00FF00"
+		             android:textSize="20sp"
+		             android:textStyle="bold" />
+		         
+		       	<TextView
+		             android:id="@+id/fechaFin"
+		             android:layout_width="match_parent"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_horizontal"
+		             android:layout_weight="1"
+		             android:textColor="#00FF00"
+		             android:textSize="20sp"
+		             android:textStyle="bold" />
+		       	
+		       	<Button
+		             android:id="@+id/btnFechaFin"
+		             android:layout_width="match_parent"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_vertical"
+		             android:layout_weight="4"
+		             android:textColor="#00FF00"
+		             android:textSize="20sp"
+		             android:text="Fecha fin"
+		             android:textStyle="bold" />
+			</TableRow>
+							
+		  	<TableRow android:layout_marginBottom="15dp" >
+		         <TextView
+		             android:id="@+id/titPestado"
+		             android:layout_width="match_parent"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_vertical"
+		             android:layout_weight="1"
+		             android:text="Prestado a:"
+		             android:textColor="#00FF00"
+		             android:textSize="20sp"
+		             android:textStyle="bold" />
+		
+				<EditText
+				    android:id="@+id/editPrestado"
+				    android:layout_width="match_parent"
+				    android:layout_height="30dp"
+				    android:layout_weight="4"
+				    android:textSize="20sp"
+				    android:layout_gravity="center_vertical"
+				    android:background="#DDD3D3D3" />
+			</TableRow>
+			</TableLayout>
+		
 			<EditText
 			    android:id="@+id/editNotas"
 			    android:layout_width="match_parent"
 			    android:layout_height="100dp"
+			    android:layout_marginBottom="15dp"
 			    android:layout_weight="1"
 			    android:textSize="20sp"
 			    android:hint="Notas"
 			    android:layout_gravity="center_vertical"
-			    android:background="#DDD3D3D3" />
-		</TableRow>
-		
-
-		
-		</TableLayout>	
+			    android:background="#DDD3D3D3" />	
 
 			<TextView
 			    android:id="@+id/titValoracion"
