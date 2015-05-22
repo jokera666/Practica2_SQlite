@@ -11,5 +11,8 @@
     <string name="title_activity_elementos_list_menu">ElementosListMenu</string>
     <string name="title_activity_leer_fichero">LeerFichero</string>
     <string name="title_activity_escribir_fichero">EscribirFichero</string>
+    <string name="title_activity_listar_peliculas">ListarPeliculas</string>
+    <string name="title_activity_insertar_pelicula">InsertarPelicula</string>
+    <string name="title_activity_elemento_list_pelicula">ElementoListPelicula</string>
 
 </resources>

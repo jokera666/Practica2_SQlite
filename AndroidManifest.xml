@@ -52,6 +52,18 @@
             android:name=".EscribirFichero"
             android:label="@string/title_activity_escribir_fichero" >
         </activity>
+        <activity
+            android:name=".ListarPeliculas"
+            android:label="@string/title_activity_listar_peliculas" >
+        </activity>
+        <activity
+            android:name=".InsertarPelicula"
+            android:label="@string/title_activity_insertar_pelicula" >
+        </activity>
+        <activity
+            android:name=".ElementoListPelicula"
+            android:label="@string/title_activity_elemento_list_pelicula" >
+        </activity>
     </application>
 
 </manifest>
