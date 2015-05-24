@@ -114,26 +114,38 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 			return statemantInsertar.executeUpdateDelete();
 		}
 		
-		public List<String> mostrarTodo()
+		public ArrayList<Pelicula> mostrarTodo()
 		{
-			List<String> lista = new ArrayList<String>();
+			ArrayList<Pelicula> lista = new ArrayList<Pelicula>();
 			//String atributos[] = new String[]{"genero","titulo","director","idioma","fecha_ini_prestamo","fecha_fin_prestamo","prestado_a","valoracion","formato","notas"};
 			Cursor rs = db.query(TABLA_NOMBRE_PELICULAS, ATRIBUTOS_PELICULAS, null, null, null, null,null);
 			if ( rs.moveToFirst() )
 			{
 				do
 				{
-					lista.add(rs.getString(0)); //El 0º param es el ID
-					lista.add(rs.getString(1)); //El 1º parám. es el genero
-					lista.add(rs.getString(2)); //El 2º parám. es el titulo
-					lista.add(rs.getString(3)); //El 3º parám. es el director
-					lista.add(rs.getString(4)); //El 4º parám. es el idioma
-					lista.add(rs.getString(5)); //El 5º parám. es el formato
-					lista.add(rs.getString(6)); //El 6º parám. es el fecha_ini_prestamo
-					lista.add(rs.getString(7)); //El 7º parám. es el fecha_fin_prestamo
-					lista.add(rs.getString(8)); //El 8º parám. es el prestado_a
-					lista.add(rs.getString(9)); //El 9º parám. es el notas
-					lista.add(rs.getString(10)); //El 10º parám. es el valoracion
+					lista.add(new Pelicula (rs.getLong(0),
+											rs.getString(1),
+											rs.getString(2),
+											rs.getString(3),
+											rs.getString(4),
+											rs.getString(5),
+											rs.getString(6),
+											rs.getString(7),
+											rs.getString(8),
+											rs.getString(9),
+											rs.getLong(10)));
+					
+//					lista.add(rs.getString(0)); //El 0º param es el ID
+//					lista.add(rs.getString(1)); //El 1º parám. es el genero
+//					lista.add(rs.getString(2)); //El 2º parám. es el titulo
+//					lista.add(rs.getString(3)); //El 3º parám. es el director
+//					lista.add(rs.getString(4)); //El 4º parám. es el idioma
+//					lista.add(rs.getString(5)); //El 5º parám. es el formato
+//					lista.add(rs.getString(6)); //El 6º parám. es el fecha_ini_prestamo
+//					lista.add(rs.getString(7)); //El 7º parám. es el fecha_fin_prestamo
+//					lista.add(rs.getString(8)); //El 8º parám. es el prestado_a
+//					lista.add(rs.getString(9)); //El 9º parám. es el notas
+//					lista.add(rs.getString(10)); //El 10º parám. es el valoracion
 				}while (rs.moveToNext());
 			}
 			

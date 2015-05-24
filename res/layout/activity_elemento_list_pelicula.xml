@@ -1,116 +1,124 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="600dp"
-    android:gravity="fill_horizontal"
-    tools:context="${relativePackage}.${activityClass}" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}"
+    android:orientation="vertical">
+    
+		    <RelativeLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_horizontal">
+    
+	    		 <ImageView
+				    android:id="@+id/portada"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:padding="5dp"
+				    android:layout_marginRight="15dp"
+				    android:src="@drawable/peliesp" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/peliale" />
+	     		 <TextView
+	     		     android:id="@+id/titTitulo"
+	     		     android:layout_width="wrap_content"
+	     		     android:layout_height="wrap_content"
+	     		     android:layout_alignParentTop="true"
+	     		     android:layout_toRightOf="@+id/portada"
+	     		     android:textSize="20dp"
+	     		     android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_toRightOf="@+id/imageView1"
-        android:text="Titulo Pelicula" />
+	     		 <TextView
+	     		     android:id="@+id/titDirector"
+	     		     android:layout_width="wrap_content"
+	     		     android:layout_height="wrap_content"
+	     		     android:layout_below="@+id/titTitulo"
+	     		     android:layout_marginTop="17dp"
+	     		     android:layout_toRightOf="@+id/portada" />
 
-    <RatingBar
-        android:id="@+id/ratingBar1"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/imageView1"
-        android:numStars="5" />
+	     		 <TextView
+	     		     android:id="@+id/titGenero"
+	     		     android:layout_width="wrap_content"
+	     		     android:layout_height="wrap_content"
+	     		     android:layout_alignLeft="@+id/titDirector"
+	     		     android:layout_below="@+id/titDirector"
+	     		     android:layout_marginTop="14dp" />
+    	</RelativeLayout>
+    
+		<TableLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:shrinkColumns="1"
+	    	android:stretchColumns="1" >
+			<!-- shrinkColumns=1 y stretchColumns=1 son para ajustar el rango de estrellas -->
+				   
+		     <TableRow
+		          android:layout_marginBottom="20dp"
+		          android:layout_marginTop="10dp">
+		        <RatingBar
+		            android:id="@+id/barraRango"
+		            style="?android:attr/ratingBarStyleSmall"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_marginBottom="20dp"
+		            android:isIndicator="true"
+		            android:layout_gravity="center_horizontal"
+		            android:max="5"
+		            android:numStars="5"
+		            android:stepSize="1" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="15dp"
-        android:text="Director" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_toRightOf="@+id/textView1"
-        android:text="Formato" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ratingBar1"
-        android:layout_alignLeft="@+id/textView2"
-        android:text="Fecha inicio" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView5"
-        android:layout_toRightOf="@+id/imageView5"
-        android:text="Prestado" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/imageView2"
-        android:layout_toLeftOf="@+id/textView6"
-        android:src="@drawable/checked" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_alignLeft="@+id/textView3"
-        android:text="Finalizado" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView3"
-        android:layout_alignRight="@+id/ratingBar1"
-        android:text="Notas" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/imageView2"
-        android:layout_toLeftOf="@+id/textView5"
-        android:src="@drawable/checked" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/imageView2"
-        android:layout_toRightOf="@+id/textView3"
-        android:src="@drawable/checked" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignTop="@+id/textView4"
-        android:layout_toRightOf="@+id/textView4"
-        android:src="@drawable/vhssmall" />
-
-</RelativeLayout>
+	   			<TextView
+		             android:id="@+id/titFechaIni"
+		             android:layout_width="wrap_content"
+		             android:layout_height="wrap_content"
+		             android:layout_weight="1"
+		             android:layout_gravity="center_horizontal"
+		             android:text="12/12/2005"
+		             android:drawableLeft="@drawable/eye"
+		             android:textSize="15sp" />
+	   		
+	   			<TextView
+		             android:id="@+id/titFormato"
+		             android:layout_width="wrap_content"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_horizontal"
+		             android:layout_weight="1"
+		             android:text="Formato"
+		             android:drawableLeft="@drawable/vhssmall"
+		             android:textSize="15sp" />
+				</TableRow>
+				
+				<TableRow android:layout_marginBottom="20dp">
+				    
+				   <TextView
+		             android:id="@+id/titNotas"
+		             android:layout_width="wrap_content"
+		             android:layout_height="wrap_content"
+		             android:layout_weight="1"
+		             android:layout_gravity="center_horizontal"
+		             android:text="Notas"
+		             android:drawableLeft="@drawable/check1"
+		             android:textSize="15sp" />
+	   		
+	   			 <TextView
+		             android:id="@+id/titFinalizado"
+		             android:layout_width="wrap_content"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_horizontal"
+		             android:layout_weight="1"
+		             android:text="Finalizado"
+		             android:drawableLeft="@drawable/uncheck1"
+		             android:textSize="15sp" />
+				    
+	   			 <TextView
+		             android:id="@+id/titPrestado"
+		             android:layout_width="50dp"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center_horizontal"
+		             android:layout_weight="1"
+		             android:text="Prestado"
+		             android:drawableLeft="@drawable/uncheck1"
+		             android:textSize="15sp" />
+				</TableRow>	   		
+			</TableLayout>		
+				
+</LinearLayout>

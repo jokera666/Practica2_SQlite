@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.List;
 
 
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -26,7 +25,7 @@ import android.widget.Toast;
 public class InsertarPelicula extends Activity {
 	
 	String[] listaGenero = new String[]{"Drama","Comedia","Historico","Accion","Aventura","Ciencia Ficcion","Romantico","Musical","Suspense","Porno"};
-	String[] listaIdioma = new String[]{"Български","Español","English","Français","Catalán","Vasco","Gallego","Deutschland","Italiano","漢語"};
+	String[] listaIdioma = new String[]{"Български","Español","English","Français","Català","Euskera","Galego","Deutschland","Italiano","漢語"};
 	String[] listaFormato = new String[]{"VHS","DVD","Blu-Ray"};
 	Spinner spinGenero;
 	Spinner spinIdioma;
