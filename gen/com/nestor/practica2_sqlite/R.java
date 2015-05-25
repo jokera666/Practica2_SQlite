@@ -45,27 +45,31 @@ public final class R {
     }
     public static final class drawable {
         public static final int acercade=0x7f020000;
-        public static final int bluray=0x7f020001;
-        public static final int check1=0x7f020002;
-        public static final int dvd=0x7f020003;
-        public static final int eye=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int insertar=0x7f020006;
-        public static final int metallica=0x7f020007;
-        public static final int numeros=0x7f020008;
-        public static final int peliale=0x7f020009;
-        public static final int pelibg=0x7f02000a;
-        public static final int pelicat=0x7f02000b;
-        public static final int pelichi=0x7f02000c;
-        public static final int pelieng=0x7f02000d;
-        public static final int peliesp=0x7f02000e;
-        public static final int pelifra=0x7f02000f;
-        public static final int peligal=0x7f020010;
-        public static final int peliita=0x7f020011;
-        public static final int pelivas=0x7f020012;
-        public static final int uncheck1=0x7f020013;
-        public static final int vhs=0x7f020014;
-        public static final int vhssmall=0x7f020015;
+        public static final int blu_ray=0x7f020001;
+        public static final int bluray=0x7f020002;
+        public static final int check1=0x7f020003;
+        public static final int checked=0x7f020004;
+        public static final int dvd=0x7f020005;
+        public static final int eye=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int insertar=0x7f020008;
+        public static final int librocat=0x7f020009;
+        public static final int metallica=0x7f02000a;
+        public static final int numeros=0x7f02000b;
+        public static final int peliale=0x7f02000c;
+        public static final int pelibg=0x7f02000d;
+        public static final int pelicat=0x7f02000e;
+        public static final int pelichi=0x7f02000f;
+        public static final int pelieng=0x7f020010;
+        public static final int peliesp=0x7f020011;
+        public static final int pelifra=0x7f020012;
+        public static final int peligal=0x7f020013;
+        public static final int peliita=0x7f020014;
+        public static final int pelivas=0x7f020015;
+        public static final int uncheck1=0x7f020016;
+        public static final int unchecked=0x7f020017;
+        public static final int vhs=0x7f020018;
+        public static final int vhssmall=0x7f020019;
     }
     public static final class id {
         public static final int OpcionCuadro=0x7f0b0030;

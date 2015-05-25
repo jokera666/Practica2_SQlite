@@ -58,6 +58,7 @@ public class ElementoPeliculaAdaptador extends BaseAdapter {// Clase Adaptadora 
         TextView imgFormato = (TextView)view.findViewById(R.id.titFormato);
         TextView imgNotas = (TextView)view.findViewById(R.id.titNotas);
         TextView imgPrestado = (TextView)view.findViewById(R.id.titPrestado);
+        TextView imgFinalizado = (TextView)view.findViewById(R.id.titFinalizado);
         
         
        
@@ -96,6 +97,10 @@ public class ElementoPeliculaAdaptador extends BaseAdapter {// Clase Adaptadora 
         String prestado_a = lista.get(position).getPrestado_a();
         if(prestado_a.equals("")) 	  imgPrestado.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.uncheck1, 0, 0, 0);
         else imgPrestado.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.check1, 0, 0, 0);
+        
+        String finalizado = lista.get(position).getFechaFin();
+        if(finalizado.equals("")) 	  imgFinalizado.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.uncheck1, 0, 0, 0);
+        else imgFinalizado.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.check1, 0, 0, 0);
         
         //Falta lo de Finalizado
         /*String fechaFin = lista.get(position).getFechaFin();

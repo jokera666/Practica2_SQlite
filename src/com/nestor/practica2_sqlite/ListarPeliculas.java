@@ -45,7 +45,7 @@ public class ListarPeliculas extends Activity {
 	    //QUI ME LO IMPRIME TODO CORRECTAMENTE EN UN TEXTVIEW pero EN UN LISTVIEW NO
 		//TextView selectView = (TextView) findViewById(R.id.select);
 		
-	    //peli1.borrarTodo(); BORRAR TODO
+	    //peli1.borrarTodo(); //BORRAR TODO
 //		StringBuilder builder = new StringBuilder();
 //		for (String filas : selectTodasPelis) {
 //		   builder.append(filas+"\n");
