@@ -3,11 +3,15 @@ package com.nestor.practica2_sqlite;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -31,6 +35,7 @@ public class ListarPeliculas extends Activity {
 		
 		DataHelper peli1 = new DataHelper(this);
 		listaPeliculas = (ListView)findViewById(R.id.miListViewPeliculas);
+		
 		
 	
 		selectTodasPelis = peli1.mostrarTodo();
@@ -62,16 +67,20 @@ public class ListarPeliculas extends Activity {
         	listaPeliculas.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 				Toast.makeText(getApplicationContext(), "ID de la pelicula: "+pelis.getPeliId(position), Toast.LENGTH_LONG).show(); 
+				
+	          	//Creamos el Intent
+            	Intent intent = new Intent(ListarPeliculas.this, InsertarPelicula.class);
+            	
+            	//Creamos la informacion a pasar entre actividades
+            	Bundle contenedor = new Bundle();
+            	contenedor.putLong("idPelicula",pelis.getPeliId(position)); 
 
-	            
-	            
-				//Este codigo sirvira en el caso si queremos pasar 
-				//el cotenido del item a otra actividad
-				/*Devolvemos el resultado de la selección
-                Intent data = new Intent();
-                data.putExtra("filename", nombreFichero.get(position));
-                setResult(RESULT_OK, data);
-                finish();*/
+        
+            	//Añadimos la informacion al intent
+            	intent.putExtras(contenedor);
+            	//ponemos en marcha la nueva actividad
+            	startActivity(intent);
+				
 			}
 		});
         	
@@ -80,6 +89,9 @@ public class ListarPeliculas extends Activity {
 		  public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 			  Toast.makeText(getApplicationContext(), "Precion continua de "+pelis.getPeliId(position), Toast.LENGTH_LONG).show();
 			  
+			  registerForContextMenu(listaPeliculas);
+			  
+			  
 		    return true;
 		  }
 		});
@@ -87,7 +99,33 @@ public class ListarPeliculas extends Activity {
 		
 	}
 	
+	//Menu contextual
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo){
+	super.onCreateContextMenu(menu, v, menuInfo);
+	MenuInflater inflater = new MenuInflater(this);
+		switch (v.getId()){
+		case R.id.borrar:
+		inflater.inflate(R.menu.borrar_menu_contextual, menu);
+		break;
+		}
+	}
 	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	switch (item.getItemId()){
+	case R.id.borrar:
+		Toast.makeText(getApplicationContext(), "borrar", Toast.LENGTH_LONG).show(); 
+	return true;
+
+	default:
+	return super.onContextItemSelected(item);
+	}
+	}
+	
+
+	
+	// Menu de navegacion (action bar)
 	 @Override
      public boolean onCreateOptionsMenu(Menu menu) {
           // Inflate the menu; añade los elemnetos del menu

@@ -74,8 +74,9 @@ public final class R {
     public static final class id {
         public static final int OpcionCuadro=0x7f0b0030;
         public static final int ScrollView01=0x7f0b0000;
-        public static final int acercaDe=0x7f0b0032;
+        public static final int acercaDe=0x7f0b0033;
         public static final int barraRango=0x7f0b0006;
+        public static final int borrar=0x7f0b0031;
         public static final int borrarTodo=0x7f0b0027;
         public static final int btnFechaFin=0x7f0b001e;
         public static final int btnFechaIni=0x7f0b001b;
@@ -92,7 +93,7 @@ public final class R {
         public static final int gestureOverlayView1=0x7f0b0029;
         public static final int guardarFichero=0x7f0b0012;
         public static final int imageView1=0x7f0b002c;
-        public static final int insertarPelicula=0x7f0b0031;
+        public static final int insertarPelicula=0x7f0b0032;
         public static final int miListView=0x7f0b0001;
         public static final int miListViewFicheros=0x7f0b0025;
         public static final int miListViewPeliculas=0x7f0b0028;
@@ -138,7 +139,8 @@ public final class R {
         public static final int activity_media_video=0x7f03000a;
     }
     public static final class menu {
-        public static final int main=0x7f0a0000;
+        public static final int borrar_menu_contextual=0x7f0a0000;
+        public static final int main=0x7f0a0001;
     }
     public static final class raw {
         public static final int gestures=0x7f040000;

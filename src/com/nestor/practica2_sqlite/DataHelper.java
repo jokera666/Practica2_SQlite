@@ -159,4 +159,39 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 			
 			return lista;
 		}	
+		
+		//
+		public ArrayList<Pelicula> mostrarPelicula(long id)
+		{
+			ArrayList<Pelicula> lista = new ArrayList<Pelicula>();
+			//String atributos[] = new String[]{"genero","titulo","director","idioma","fecha_ini_prestamo","fecha_fin_prestamo","prestado_a","valoracion","formato","notas"};
+			//String casa = "hola";
+			String newid[] = new String[]{Long.toString(id)};
+			
+			Cursor rs = db.query(TABLA_NOMBRE_PELICULAS, ATRIBUTOS_PELICULAS, "_id", newid, null, null,null);
+			if ( rs.moveToFirst() )
+			{
+				do
+				{
+					lista.add(new Pelicula (rs.getLong(0),
+											rs.getString(1),
+											rs.getString(2),
+											rs.getString(3),
+											rs.getString(4),
+											rs.getString(5),
+											rs.getString(6),
+											rs.getString(7),
+											rs.getString(8),
+											rs.getString(9),
+											rs.getLong(10)));
+				}while (rs.moveToNext());
+			}
+			
+			if ( rs!= null && !rs.isClosed() )
+			{
+				rs.close();
+			}
+			
+			return lista;
+		}			
 }

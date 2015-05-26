@@ -1,9 +1,9 @@
 package com.nestor.practica2_sqlite;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -57,10 +57,27 @@ public class InsertarPelicula extends Activity {
 	
 	private DataHelper peli;
 	
+	long id_recibido;
+	Bundle contenedor_recibido;
+	ArrayList<Pelicula> selectPeliEditar;
+	editarPeliculaAdaptador editPeli;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_insertar_pelicula);
+		
+		//precesamiento necesario para modificar pelicula
+		contenedor_recibido  = this.getIntent().getExtras();
+        if (contenedor_recibido!=null)
+        {
+        	id_recibido = contenedor_recibido.getLong("idPelicula");
+        	Toast.makeText(getBaseContext(), "id de peli para editar"+id_recibido, Toast.LENGTH_LONG).show();
+        }
+        
+//       selectPeliEditar = peli.mostrarPelicula(id_recibido);
+//        editPeli = new editarPeliculaAdaptador(this, selectPeliEditar);
+        
 		
 		peli = new DataHelper(this); // this es igual a getApplicationContext()
 		titulo = (EditText)findViewById(R.id.editTitulo);
