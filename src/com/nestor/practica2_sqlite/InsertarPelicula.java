@@ -57,31 +57,18 @@ public class InsertarPelicula extends Activity {
 	
 	private DataHelper peli;
 	
-	long id_recibido;
+	long id_recibido=-1;
 	Bundle contenedor_recibido;
-	ArrayList<Pelicula> selectPeliEditar;
-	editarPeliculaAdaptador editPeli;
+	Pelicula selectPeliEditar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_insertar_pelicula);
 		
-		//precesamiento necesario para modificar pelicula
-		contenedor_recibido  = this.getIntent().getExtras();
-        if (contenedor_recibido!=null)
-        {
-        	id_recibido = contenedor_recibido.getLong("idPelicula");
-        	Toast.makeText(getBaseContext(), "id de peli para editar"+id_recibido, Toast.LENGTH_LONG).show();
-        }
-        
-//       selectPeliEditar = peli.mostrarPelicula(id_recibido);
-//        editPeli = new editarPeliculaAdaptador(this, selectPeliEditar);
-        
-		
 		peli = new DataHelper(this); // this es igual a getApplicationContext()
+		
 		titulo = (EditText)findViewById(R.id.editTitulo);
-		//titulo.setText("Hola");
 		director = (EditText)findViewById(R.id.editDirector);
 		fecha_ini = (TextView) findViewById(R.id.fechaIni);
 		fecha_fin = (TextView) findViewById(R.id.fechaFin);
@@ -106,7 +93,46 @@ public class InsertarPelicula extends Activity {
 		
 		
 		
-		
+		//precesamiento necesario para modificar pelicula
+		contenedor_recibido  = this.getIntent().getExtras();
+        if (contenedor_recibido!=null)
+        {
+        	id_recibido = contenedor_recibido.getLong("idPelicula");
+        	
+        	selectPeliEditar = peli.mostrarPelicula(id_recibido);
+        	
+        	
+        	ArrayAdapter aux1Adapter;
+        	aux1Adapter = (ArrayAdapter) spinGenero.getAdapter(); // adaptador auxuliar que obtiene el adaptador de spinGenero
+        	int posicionGen = aux1Adapter.getPosition(selectPeliEditar.getGenero()); //optiene la posicion del getGenero
+        	spinGenero.setSelection(posicionGen);// establece la posicion al spinGenero
+        	
+        	titulo.setText(selectPeliEditar.getTitulo());
+        	director.setText(selectPeliEditar.getDirector());
+        	
+        	ArrayAdapter aux2Adapter;
+        	aux2Adapter = (ArrayAdapter) spinIdioma.getAdapter();
+        	int posicionIdi = aux2Adapter.getPosition(selectPeliEditar.getIdioma());
+        	spinIdioma.setSelection(posicionIdi);
+        	
+        	ArrayAdapter aux3Adapter;
+        	aux3Adapter = (ArrayAdapter) spinFormato.getAdapter();
+        	int posicionFor = aux3Adapter.getPosition(selectPeliEditar.getFormato());
+        	spinFormato.setSelection(posicionFor);
+        	
+        	fecha_ini.setText(selectPeliEditar.getFechaIni());
+        	fecha_fin.setText(selectPeliEditar.getFechaFin());
+        	
+        	prestado_a.setText(selectPeliEditar.getPrestado_a());
+        	notas.setText(selectPeliEditar.getNotas());
+        	
+        	valoracion.setRating(selectPeliEditar.getValoracion());
+        	
+        	
+        	
+        	
+        	Toast.makeText(getBaseContext(), "id de peli para editar"+id_recibido, Toast.LENGTH_LONG).show();
+        }
 		
 		
 		Button btnFecha_ini = (Button) findViewById(R.id.btnFechaIni);
@@ -136,7 +162,7 @@ public class InsertarPelicula extends Activity {
 			}
 		});
         
-        
+       
         
 		
         Button btnFecha_fin = (Button) findViewById(R.id.btnFechaFin);
@@ -189,10 +215,22 @@ public class InsertarPelicula extends Activity {
 				inValoracion = valoracion.getRating();
 				long longValoracion = (long) Math.ceil(inValoracion);
 				
+				//variable de insertar / editar
+				if(id_recibido==-1)
+				{
+					peli.insertar(inGenero,inTitulo,inDirector,inIdioma,inFormato,inFechaIni,inFechaFin,inPrestado_a,inNotas,longValoracion);
+					Intent intent = new Intent(InsertarPelicula.this,ListarPeliculas.class);
+					startActivity(intent);	
+				}
 				
-				peli.insertar(inGenero,inTitulo,inDirector,inIdioma,inFormato,inFechaIni,inFechaFin,inPrestado_a,inNotas,longValoracion);
-				Intent intent = new Intent(InsertarPelicula.this,ListarPeliculas.class);
-				startActivity(intent);	       	 
+				else
+				{
+					peli.modificar(inGenero,inTitulo,inDirector,inIdioma,inFormato,inFechaIni,inFechaFin,inPrestado_a,inNotas,longValoracion,id_recibido);
+					Intent intent = new Intent(InsertarPelicula.this,ListarPeliculas.class);
+					startActivity(intent);	
+				}
+				
+       	 
 			}
 		});
         

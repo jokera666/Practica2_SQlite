@@ -1,12 +1,77 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollView01"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="${relativePackage}.${activityClass}" >
+    android:background="@drawable/metallica"
+    android:scrollbars="horizontal" >
+    
+	<TableLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="135dp"
+	    android:orientation="vertical"
+	    tools:context="${relativePackage}.${activityClass}" >
+	    
+	    <VideoView android:id="@+id/ventanaVideo"
+			android:layout_height="150dp"
+			android:layout_width="150dp"
+			android:layout_marginBottom="20dp"
+			android:background="#00FF00">
+		</VideoView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+	    <TableRow android:layout_marginBottom="40dp">
+		<Button
+		    android:id="@+id/play"
+		    android:layout_width="100dp"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="15dp"
+		    android:textSize="20sp"
+		    android:textStyle="bold"
+		    android:textColor="#00FF00"
+		    android:text="Play" />
 
-</RelativeLayout>
+		<Button
+		    android:id="@+id/pause"
+		    android:layout_width="100dp"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="15dp"
+		    android:textSize="20sp"
+		    android:textStyle="bold"
+		    android:textColor="#00FF00"
+		    android:text="Pause" />
+		
+		<Button
+		    android:id="@+id/stop"
+		    android:layout_width="100dp"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="15dp"
+		    android:textSize="20sp"
+		    android:textStyle="bold"
+		    android:textColor="#00FF00"
+		    android:text="Stop" />
+
+		</TableRow>
+
+	    <TextView 
+	        android:id="@+id/titVolumen"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="15dp"
+		    android:textSize="20sp"
+		    android:textStyle="bold"
+		    android:textColor="#00FF00"
+		    android:text="Volumen" />
+	    
+		<SeekBar
+		    android:id="@+id/barraVol"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:background="#DD00FF00"
+		    android:text="Volumen" />
+
+
+		</TableLayout>
+</ScrollView>

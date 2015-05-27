@@ -44,10 +44,8 @@ public class AlmacenExtern extends Activity {
 		 
         
 		listView.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intento;
-			    // When clicked, show a toast with the TextView text
 				//Toast.makeText(getApplicationContext(), "Has pulsado la opcion: "+position, Toast.LENGTH_LONG).show();
 				switch(position)
 				{

@@ -24,7 +24,7 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 														 "prestado_a",		  // [8]	
 														 "notas",			  // [9]
 														 "valoracion"};		  //[10]
-	private static final String CREAR_TABLA_PELICULAS = "CREATE TABLE "+TABLA_NOMBRE_PELICULAS+" ( "+ATRIBUTOS_PELICULAS[0]+" Long primary key autoincrement,"
+	private static final String CREAR_TABLA_PELICULAS = "CREATE TABLE "+TABLA_NOMBRE_PELICULAS+" ( "+ATRIBUTOS_PELICULAS[0]+" long primary key autoincrement,"
 																								   	+ATRIBUTOS_PELICULAS[1]+" text not null,"
 																								   	+ATRIBUTOS_PELICULAS[2]+" text not null,"
 																								   	+ATRIBUTOS_PELICULAS[3]+" text not null,"
@@ -47,12 +47,14 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 																				  +ATRIBUTOS_PELICULAS[9]+","
 																				  +ATRIBUTOS_PELICULAS[10]+")"
 																				  +" VALUES (?,?,?,?,?,?,?,?,?,?);";
-	private static final String UPDATE = "UPDATE "+TABLA_NOMBRE_PELICULAS+" SET "+ATRIBUTOS_PELICULAS[1]+"= ? WHERE "+ATRIBUTOS_PELICULAS[0]+"=?";
+	private static final String UPDATE = "UPDATE "+TABLA_NOMBRE_PELICULAS+" SET "+ATRIBUTOS_PELICULAS[1]+"= ?, "+ATRIBUTOS_PELICULAS[2]+"= ?, "+ATRIBUTOS_PELICULAS[3]+"= ?, "+ATRIBUTOS_PELICULAS[4]+"= ?, "+ATRIBUTOS_PELICULAS[5]+"= ?, "+ATRIBUTOS_PELICULAS[6]+"= ?, "+ATRIBUTOS_PELICULAS[7]+"= ?, "+ATRIBUTOS_PELICULAS[8]+"= ?, "+ATRIBUTOS_PELICULAS[9]+"= ?, "+ATRIBUTOS_PELICULAS[10]+"= ? WHERE "+ATRIBUTOS_PELICULAS[0]+"=?";
+	private static final String DELETE = "DELETE FROM "+TABLA_NOMBRE_PELICULAS+" WHERE "+ATRIBUTOS_PELICULAS[0]+"=?";
 	// propiedades para preparar y atacar la base de datos
 	private Context contexto;
 	private SQLiteDatabase db;
 	private SQLiteStatement statemantInsertar;
 	private SQLiteStatement statemantModificar;
+	private SQLiteStatement statemantBorrar;
 
 	//Constructor por defecto del adaptador dataHelper
 	public DataHelper (Context context){ // hay que pasarle el contexto de la clase donde se crea el objeto
@@ -61,6 +63,7 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 		this.db = openHelper.getWritableDatabase();
 		this.statemantInsertar = this.db.compileStatement(INSERT); // es lo mismo db.execSQL(INSERT); // compara el insert
 		this.statemantModificar = this.db.compileStatement(UPDATE); // es lo mismo db.execSQL(UPDATE);
+		this.statemantBorrar = this.db.compileStatement(DELETE); // es lo mismo db.execSQL(UPDATE);
 		
 	}
 	
@@ -107,11 +110,26 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 			return statemantInsertar.executeInsert();
 		}
 		
-		public long modificar(String newGenero, long id)
+		public long borrar(long id)
+		{
+			statemantBorrar.bindLong(1, id);
+			return statemantBorrar.executeUpdateDelete();
+		}
+		
+		public long modificar(String newGenero, String newTitulo, String newDirector, String newIdioma, String newFormato, String newFecha_ini, String newFecha_fin, String newPrestado_a, String newNotas,long newValoracion, long id)
 		{
 			statemantModificar.bindString(1, newGenero); // los 1, 2 son el ? que se pasan en la en la preparacion del statement de las propiedades
-			statemantModificar.bindLong(2, id);
-			return statemantInsertar.executeUpdateDelete();
+			statemantModificar.bindString(2, newTitulo);
+			statemantModificar.bindString(3, newDirector);
+			statemantModificar.bindString(4, newIdioma);
+			statemantModificar.bindString(5, newFormato);
+			statemantModificar.bindString(6, newFecha_ini);
+			statemantModificar.bindString(7, newFecha_fin);
+			statemantModificar.bindString(8, newPrestado_a);
+			statemantModificar.bindString(9, newNotas);
+			statemantModificar.bindLong(10, newValoracion);
+			statemantModificar.bindLong(11, id);
+			return statemantModificar.executeUpdateDelete();
 		}
 		
 		public ArrayList<Pelicula> mostrarTodo()
@@ -160,31 +178,29 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 			return lista;
 		}	
 		
-		//
-		public ArrayList<Pelicula> mostrarPelicula(long id)
+		// No hace falta crear una una array de Pelicula ya que devuelve un registro
+		public Pelicula mostrarPelicula(long id)
 		{
-			ArrayList<Pelicula> lista = new ArrayList<Pelicula>();
+			Pelicula peli = null;
 			//String atributos[] = new String[]{"genero","titulo","director","idioma","fecha_ini_prestamo","fecha_fin_prestamo","prestado_a","valoracion","formato","notas"};
 			//String casa = "hola";
 			String newid[] = new String[]{Long.toString(id)};
 			
-			Cursor rs = db.query(TABLA_NOMBRE_PELICULAS, ATRIBUTOS_PELICULAS, "_id", newid, null, null,null);
+			Cursor rs = db.query(TABLA_NOMBRE_PELICULAS, ATRIBUTOS_PELICULAS, "_id=?", newid, null, null,null);
 			if ( rs.moveToFirst() )
 			{
-				do
-				{
-					lista.add(new Pelicula (rs.getLong(0),
-											rs.getString(1),
-											rs.getString(2),
-											rs.getString(3),
-											rs.getString(4),
-											rs.getString(5),
-											rs.getString(6),
-											rs.getString(7),
-											rs.getString(8),
-											rs.getString(9),
-											rs.getLong(10)));
-				}while (rs.moveToNext());
+				
+				 peli = new Pelicula (rs.getLong(0),
+						rs.getString(1),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getString(4),
+						rs.getString(5),
+						rs.getString(6),
+						rs.getString(7),
+						rs.getString(8),
+						rs.getString(9),
+						rs.getLong(10));
 			}
 			
 			if ( rs!= null && !rs.isClosed() )
@@ -192,6 +208,6 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 				rs.close();
 			}
 			
-			return lista;
+			return peli;
 		}			
 }

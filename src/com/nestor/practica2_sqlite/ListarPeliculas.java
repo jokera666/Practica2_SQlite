@@ -5,7 +5,10 @@ import java.util.List;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -16,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,16 +31,19 @@ public class ListarPeliculas extends Activity {
 	ListView listaPeliculas;
 	ArrayList<Pelicula> selectTodasPelis;
 	ElementoPeliculaAdaptador pelis;
+	DataHelper peli1;
+	long idPeliSelecionada;
+	long id_obtenido;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listar_peliculas);
 		
-		DataHelper peli1 = new DataHelper(this);
+		peli1 = new DataHelper(this);
 		listaPeliculas = (ListView)findViewById(R.id.miListViewPeliculas);
 		
-		
+		registerForContextMenu(listaPeliculas); //es necesario para el menu contextual
 	
 		selectTodasPelis = peli1.mostrarTodo();
 		
@@ -66,15 +73,15 @@ public class ListarPeliculas extends Activity {
         	// Accion para realizar al pulsar sobre un item de la lista        
         	listaPeliculas.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-				Toast.makeText(getApplicationContext(), "ID de la pelicula: "+pelis.getPeliId(position), Toast.LENGTH_LONG).show(); 
+				//Toast.makeText(getApplicationContext(), "ID de la pelicula: "+pelis.getPeliId(position), Toast.LENGTH_LONG).show(); 
 				
-	          	//Creamos el Intent
+	          	
+				//Creamos el Intent
             	Intent intent = new Intent(ListarPeliculas.this, InsertarPelicula.class);
             	
             	//Creamos la informacion a pasar entre actividades
             	Bundle contenedor = new Bundle();
             	contenedor.putLong("idPelicula",pelis.getPeliId(position)); 
-
         
             	//Añadimos la informacion al intent
             	intent.putExtras(contenedor);
@@ -85,16 +92,16 @@ public class ListarPeliculas extends Activity {
 		});
         	
     	  // Accion al manter pulsado sobre el item de la lista    
-    	  listaPeliculas.setOnItemLongClickListener (new OnItemLongClickListener() {
-		  public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-			  Toast.makeText(getApplicationContext(), "Precion continua de "+pelis.getPeliId(position), Toast.LENGTH_LONG).show();
-			  
-			  registerForContextMenu(listaPeliculas);
-			  
-			  
-		    return true;
-		  }
-		});
+//    	  listaPeliculas.setOnItemLongClickListener (new OnItemLongClickListener() {
+//		  public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//			  Toast.makeText(getApplicationContext(), "Precion continua de "+pelis.getPeliId(position), Toast.LENGTH_LONG).show();
+//			  
+//			  id_obtenido = pelis.getPeliId(position);
+//			  
+//			  
+//		    return true;
+//		  }
+//		});
 		
 		
 	}
@@ -105,7 +112,8 @@ public class ListarPeliculas extends Activity {
 	super.onCreateContextMenu(menu, v, menuInfo);
 	MenuInflater inflater = new MenuInflater(this);
 		switch (v.getId()){
-		case R.id.borrar:
+		case R.id.miListViewPeliculas:
+		//int positionLong = ((AdapterContextMenuInfo) item.getMenuInfo).position;
 		inflater.inflate(R.menu.borrar_menu_contextual, menu);
 		break;
 		}
@@ -115,7 +123,28 @@ public class ListarPeliculas extends Activity {
 	public boolean onContextItemSelected(MenuItem item) {
 	switch (item.getItemId()){
 	case R.id.borrar:
-		Toast.makeText(getApplicationContext(), "borrar", Toast.LENGTH_LONG).show(); 
+		AlertDialog.Builder advertencia = new AlertDialog.Builder(this);
+		advertencia.setTitle("Seguro que quieres borrar la pelicula?");
+		advertencia.setMessage("Pero de verdad te la vas a jugar borrandola?");
+		advertencia.setPositiveButton("Si", new OnClickListener() {
+				public void onClick(DialogInterface dialog, int arg1) {
+					
+					Toast.makeText(getApplicationContext(), "SI BORRA "+id_obtenido, Toast.LENGTH_LONG).show();
+					
+					
+					peli1.borrar(id_obtenido);
+				}
+				});
+		
+		advertencia.setNegativeButton("No", new OnClickListener(){
+				public void onClick(DialogInterface dialog, int arg1) {
+					Toast.makeText(getApplicationContext(), "NO BORRES NADA", Toast.LENGTH_LONG).show();
+				}
+				});
+		advertencia.show();
+		
+		//alertDialog
+		
 	return true;
 
 	default:
@@ -124,6 +153,12 @@ public class ListarPeliculas extends Activity {
 	}
 	
 
+	public long dameId(long id)
+	{
+		idPeliSelecionada = id;
+		
+		return idPeliSelecionada;
+	}
 	
 	// Menu de navegacion (action bar)
 	 @Override
