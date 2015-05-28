@@ -8,6 +8,11 @@
 	        android:orderInCategory="100"
 	        android:showAsAction="never"
 	        android:title="Añadir pelicula"/>
+	   	<item
+	        android:id="@+id/borrarTodo"
+	        android:orderInCategory="100"
+	        android:showAsAction="never"
+	        android:title="Borrar todo"/>
 	  	
 	  	<item
 	        android:id="@+id/acercaDe"

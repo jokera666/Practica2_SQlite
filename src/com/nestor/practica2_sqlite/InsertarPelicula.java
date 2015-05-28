@@ -6,9 +6,12 @@ import java.util.Calendar;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +24,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class InsertarPelicula extends Activity {
 	
@@ -127,11 +131,6 @@ public class InsertarPelicula extends Activity {
         	notas.setText(selectPeliEditar.getNotas());
         	
         	valoracion.setRating(selectPeliEditar.getValoracion());
-        	
-        	
-        	
-        	
-        	Toast.makeText(getBaseContext(), "id de peli para editar"+id_recibido, Toast.LENGTH_LONG).show();
         }
 		
 		
@@ -215,6 +214,19 @@ public class InsertarPelicula extends Activity {
 				inValoracion = valoracion.getRating();
 				long longValoracion = (long) Math.ceil(inValoracion);
 				
+				if(inTitulo.length() == 0){ // comprobacion de error EditText Campo vacio
+					Toast.makeText(getBaseContext(), "El campo Titulo es obligatorio", Toast.LENGTH_LONG).show();
+		        	return; // Detiene la actividad
+				}
+				
+				if(inDirector.length() == 0){ // comprobacion de error EditText Campo vacio
+					Toast.makeText(getBaseContext(), "El campo Director es obligatorio", Toast.LENGTH_LONG).show();
+		        	return; // Detiene la actividad
+				}
+				
+				
+				
+				
 				//variable de insertar / editar
 				if(id_recibido==-1)
 				{
@@ -284,6 +296,7 @@ public class InsertarPelicula extends Activity {
           	toast.show();
               return true;
           }
+          
           
           if (id == R.id.acercaDe) {
           	item.setChecked(true);

@@ -27,7 +27,7 @@
 		             android:layout_height="50dp"
 		             android:layout_gravity="center_vertical"
 		             android:layout_weight="1"
-		             android:text="Genero"
+		             android:text="Genero*"
 		             android:textColor="#00FF00"
 		             android:textSize="20sp"
 		             android:textStyle="bold" />
@@ -48,7 +48,7 @@
 		             android:layout_height="wrap_content"
 		             android:layout_gravity="center_vertical"
 		             android:layout_weight="1"
-		             android:text="Titulo"
+		             android:text="Titulo*"
 		             android:textColor="#00FF00"
 		             android:textSize="20sp"
 		             android:textStyle="bold" />
@@ -70,7 +70,7 @@
 		             android:layout_height="wrap_content"
 		             android:layout_gravity="center_vertical"
 		             android:layout_weight="1"
-		             android:text="Director"
+		             android:text="Director*"
 		             android:textColor="#00FF00"
 		             android:textSize="20sp"
 		             android:textStyle="bold" />

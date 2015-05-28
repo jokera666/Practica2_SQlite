@@ -1,14 +1,16 @@
 
 package com.nestor.practica2_sqlite;
 
-import java.sql.Date;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 import java.util.List;
 
 import android.content.Context;
+import android.net.ParseException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,25 +99,29 @@ public class ElementoPeliculaAdaptador extends BaseAdapter {// Clase Adaptadora 
         if(prestado_a.equals("")) 	  imgPrestado.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.uncheck1, 0, 0, 0);
         else imgPrestado.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.check1, 0, 0, 0);
         
-        String finalizado = lista.get(position).getFechaFin();
-        if(finalizado.equals("")) 	  imgFinalizado.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.uncheck1, 0, 0, 0);
-        else imgFinalizado.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.check1, 0, 0, 0);
-        
-        //Falta lo de Finalizado
-        /*String fechaFin = lista.get(position).getFechaFin();
-        try{
-        	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // here set the pattern as you date in string was containing like date/month/year
-        	Date d = sdf.parse("20/12/2011");
-        	}catch(ParseException ex){
-        	    // handle parsing exception if date string was different from the pattern applying into the SimpleDateFormat contructor
-        	}*/
 
         
-        
-      
-        
-        
-        
+        String fechaFin = lista.get(position).getFechaFin();
+        Date dateFin;
+        Date nowDate = new Date(System.currentTimeMillis());
+        try{
+        	SimpleDateFormat fechaForm = new SimpleDateFormat("dd/MM/yyyy"); // here set the pattern as you date in string was containing like date/month/year
+        	dateFin = fechaForm.parse(fechaFin.toString());
+        	int diferenciaFechas = nowDate.compareTo(dateFin);
+        	
+        	//La fecha actual es mayor que la fecha indicada "dateFin"
+        	if(diferenciaFechas>0)  imgFinalizado.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.check1, 0, 0, 0);
+        	//La fecha actual es menor que la fecha indicada "dateFin"
+        	if(diferenciaFechas<0)  imgFinalizado.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.uncheck1, 0, 0, 0);
+        	//Las dos fechas son iguales
+        	if(diferenciaFechas==0) imgFinalizado.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.uncheck1, 0, 0, 0);
+        	
+        	
+        	} catch (java.text.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
         
         
         return view;

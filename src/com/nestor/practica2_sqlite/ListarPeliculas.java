@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -54,17 +55,7 @@ public class ListarPeliculas extends Activity {
 	    	Toast.makeText(getBaseContext(), "No se han encontrado registros", Toast.LENGTH_LONG).show();
 	    }
 	    
-	    
-	    //QUI ME LO IMPRIME TODO CORRECTAMENTE EN UN TEXTVIEW pero EN UN LISTVIEW NO
-		//TextView selectView = (TextView) findViewById(R.id.select);
-		
-	    //peli1.borrarTodo(); //BORRAR TODO
-//		StringBuilder builder = new StringBuilder();
-//		for (String filas : selectTodasPelis) {
-//		   builder.append(filas+"\n");
-//		}
-		
-		//selectView.setText(builder.toString());	
+	 	
 		
 	    pelis = new ElementoPeliculaAdaptador(this,selectTodasPelis); 
         listaPeliculas.setAdapter(pelis);
@@ -90,21 +81,7 @@ public class ListarPeliculas extends Activity {
             	startActivity(intent);
 				
 			}
-		});
-        	
-    	  // Accion al manter pulsado sobre el item de la lista    
-//    	  listaPeliculas.setOnItemLongClickListener (new OnItemLongClickListener() {
-//		  public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//			  Toast.makeText(getApplicationContext(), "Precion continua de "+pelis.getPeliId(position), Toast.LENGTH_LONG).show();
-//			  
-//			  id_obtenido = pelis.getPeliId(position);
-//			  
-//			  
-//		    return true;
-//		  }
-//		});
-		
-		
+		});		
 	}
 	
 	//Menu contextual
@@ -125,17 +102,18 @@ public class ListarPeliculas extends Activity {
 	case R.id.borrar:
 		AlertDialog.Builder advertencia = new AlertDialog.Builder(this);
 		positionLong = ((AdapterContextMenuInfo) item.getMenuInfo()).position;
-		advertencia.setTitle("Seguro que quieres borrar la pelicula?");
-		advertencia.setMessage("Pero de verdad te la vas a jugar borrandola?");
+		String nombrePeli = selectTodasPelis.get(positionLong).getTitulo();
+		advertencia.setTitle("Borrar la pelicula "+nombrePeli);
+		advertencia.setMessage("Seguro que quieres borrar la pelicula?");
 		
 		advertencia.setPositiveButton("Si", new OnClickListener() {
 				public void onClick(DialogInterface dialog, int arg1) {
 					
-					
 					id_obtenido = peli1.borrar(selectTodasPelis.get(positionLong).getId());
-					selectTodasPelis = peli1.mostrarTodo(); 
-					//falta refresh
-					listaPeliculas.setAdapter(pelis);
+					//Refrescar el ListView despues del borrado cerrando y abriendo la actividad
+					ListarPeliculas.this.finish();	
+					startActivity(new Intent(ListarPeliculas.this, ListarPeliculas.this.getClass()));
+					
 				}
 				});
 		
@@ -192,6 +170,34 @@ public class ListarPeliculas extends Activity {
           	// para los toast se puede utilizar tambien:
           	//Toast toast = Toast.makeText(this, "esto es mi mensaje",Toast.LENGTH_SHORT);
           	toast.show();
+              return true;
+          }
+          
+          if (id == R.id.borrarTodo) {
+          	item.setChecked(true);
+          	
+          	AlertDialog.Builder advertencia = new AlertDialog.Builder(this);
+      		advertencia.setTitle("Borrar todo");
+      		advertencia.setMessage("Seguro que quieres borrar todas las peliculas?");
+      		
+      		advertencia.setPositiveButton("Si", new OnClickListener() {
+      				public void onClick(DialogInterface dialog, int arg1) {
+      					
+      				peli1.borrarTodo();
+					ListarPeliculas.this.finish();	
+					startActivity(new Intent(ListarPeliculas.this, ListarPeliculas.this.getClass()));
+      					
+      				}
+      				});
+      		
+      		advertencia.setNegativeButton("No", new OnClickListener(){
+      				public void onClick(DialogInterface dialog, int arg1) {
+      					//no borres nada
+      				}
+      				});
+      		
+      		advertencia.show();
+          	
               return true;
           }
           
