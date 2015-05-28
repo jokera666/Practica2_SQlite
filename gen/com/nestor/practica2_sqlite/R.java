@@ -74,10 +74,11 @@ public final class R {
     public static final class id {
         public static final int OpcionCuadro=0x7f0b0030;
         public static final int ScrollView01=0x7f0b0000;
-        public static final int acercaDe=0x7f0b0039;
+        public static final int acercaDe=0x7f0b003b;
+        public static final int barraDuracion=0x7f0b0038;
         public static final int barraRango=0x7f0b0006;
         public static final int barraVol=0x7f0b0035;
-        public static final int borrar=0x7f0b0037;
+        public static final int borrar=0x7f0b0039;
         public static final int borrarTodo=0x7f0b0027;
         public static final int btnFechaFin=0x7f0b001e;
         public static final int btnFechaIni=0x7f0b001b;
@@ -94,7 +95,7 @@ public final class R {
         public static final int gestureOverlayView1=0x7f0b0029;
         public static final int guardarFichero=0x7f0b0012;
         public static final int imageView1=0x7f0b002c;
-        public static final int insertarPelicula=0x7f0b0038;
+        public static final int insertarPelicula=0x7f0b003a;
         public static final int miListView=0x7f0b0001;
         public static final int miListViewFicheros=0x7f0b0025;
         public static final int miListViewPeliculas=0x7f0b0028;
@@ -112,6 +113,7 @@ public final class R {
         public static final int spinIdioma=0x7f0b0017;
         public static final int stop=0x7f0b0033;
         public static final int titDirector=0x7f0b0004;
+        public static final int titDuracion=0x7f0b0037;
         public static final int titFechaIni=0x7f0b0007;
         public static final int titFechafin=0x7f0b001c;
         public static final int titFechaini=0x7f0b0019;

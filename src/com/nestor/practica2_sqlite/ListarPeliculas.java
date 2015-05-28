@@ -34,6 +34,7 @@ public class ListarPeliculas extends Activity {
 	DataHelper peli1;
 	long idPeliSelecionada;
 	long id_obtenido;
+	int positionLong;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,13 +76,13 @@ public class ListarPeliculas extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 				//Toast.makeText(getApplicationContext(), "ID de la pelicula: "+pelis.getPeliId(position), Toast.LENGTH_LONG).show(); 
 				
-	          	
+				
 				//Creamos el Intent
             	Intent intent = new Intent(ListarPeliculas.this, InsertarPelicula.class);
             	
             	//Creamos la informacion a pasar entre actividades
             	Bundle contenedor = new Bundle();
-            	contenedor.putLong("idPelicula",pelis.getPeliId(position)); 
+            	contenedor.putLong("idPelicula",selectTodasPelis.get(positionLong).getId()); 
         
             	//Añadimos la informacion al intent
             	intent.putExtras(contenedor);
@@ -113,7 +114,6 @@ public class ListarPeliculas extends Activity {
 	MenuInflater inflater = new MenuInflater(this);
 		switch (v.getId()){
 		case R.id.miListViewPeliculas:
-		//int positionLong = ((AdapterContextMenuInfo) item.getMenuInfo).position;
 		inflater.inflate(R.menu.borrar_menu_contextual, menu);
 		break;
 		}
@@ -124,26 +124,29 @@ public class ListarPeliculas extends Activity {
 	switch (item.getItemId()){
 	case R.id.borrar:
 		AlertDialog.Builder advertencia = new AlertDialog.Builder(this);
+		positionLong = ((AdapterContextMenuInfo) item.getMenuInfo()).position;
 		advertencia.setTitle("Seguro que quieres borrar la pelicula?");
 		advertencia.setMessage("Pero de verdad te la vas a jugar borrandola?");
+		
 		advertencia.setPositiveButton("Si", new OnClickListener() {
 				public void onClick(DialogInterface dialog, int arg1) {
 					
-					Toast.makeText(getApplicationContext(), "SI BORRA "+id_obtenido, Toast.LENGTH_LONG).show();
 					
-					
-					peli1.borrar(id_obtenido);
+					id_obtenido = peli1.borrar(selectTodasPelis.get(positionLong).getId());
+					selectTodasPelis = peli1.mostrarTodo(); 
+					//falta refresh
+					listaPeliculas.setAdapter(pelis);
 				}
 				});
 		
 		advertencia.setNegativeButton("No", new OnClickListener(){
 				public void onClick(DialogInterface dialog, int arg1) {
-					Toast.makeText(getApplicationContext(), "NO BORRES NADA", Toast.LENGTH_LONG).show();
+					//no borres nada
 				}
 				});
+		
 		advertencia.show();
 		
-		//alertDialog
 		
 	return true;
 
@@ -153,12 +156,7 @@ public class ListarPeliculas extends Activity {
 	}
 	
 
-	public long dameId(long id)
-	{
-		idPeliSelecionada = id;
-		
-		return idPeliSelecionada;
-	}
+
 	
 	// Menu de navegacion (action bar)
 	 @Override
