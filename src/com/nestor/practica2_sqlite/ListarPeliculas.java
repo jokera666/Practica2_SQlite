@@ -34,7 +34,6 @@ public class ListarPeliculas extends Activity {
 	ElementoPeliculaAdaptador pelis;
 	DataHelper peli1;
 	long idPeliSelecionada;
-	long id_obtenido;
 	int positionLong;
 	
 	@Override
@@ -109,7 +108,7 @@ public class ListarPeliculas extends Activity {
 		advertencia.setPositiveButton("Sí", new OnClickListener() {
 				public void onClick(DialogInterface dialog, int arg1) {
 					
-					id_obtenido = peli1.borrar(selectTodasPelis.get(positionLong).getId());
+					peli1.borrar(selectTodasPelis.get(positionLong).getId());
 					//Refrescar el ListView despues del borrado cerrando y abriendo la actividad
 					ListarPeliculas.this.finish();	
 					startActivity(new Intent(ListarPeliculas.this, ListarPeliculas.this.getClass()));
