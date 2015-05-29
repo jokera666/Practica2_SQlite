@@ -73,7 +73,7 @@ public class ListarPeliculas extends Activity {
             	
             	//Creamos la informacion a pasar entre actividades
             	Bundle contenedor = new Bundle();
-            	contenedor.putLong("idPelicula",selectTodasPelis.get(positionLong).getId()); 
+            	contenedor.putLong("idPelicula",pelis.getPeliId(position)); 
         
             	//Añadimos la informacion al intent
             	intent.putExtras(contenedor);
@@ -106,7 +106,7 @@ public class ListarPeliculas extends Activity {
 		advertencia.setTitle("Borrar la pelicula "+nombrePeli);
 		advertencia.setMessage("Seguro que quieres borrar la pelicula?");
 		
-		advertencia.setPositiveButton("Si", new OnClickListener() {
+		advertencia.setPositiveButton("Sí", new OnClickListener() {
 				public void onClick(DialogInterface dialog, int arg1) {
 					
 					id_obtenido = peli1.borrar(selectTodasPelis.get(positionLong).getId());
