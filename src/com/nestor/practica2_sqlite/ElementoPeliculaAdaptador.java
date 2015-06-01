@@ -6,11 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-
-import java.util.List;
-
 import android.content.Context;
-import android.net.ParseException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +43,7 @@ public class ElementoPeliculaAdaptador extends BaseAdapter {// Clase Adaptadora 
         
     	//inflar el layout para cada item del ListView
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.activity_elemento_list_pelicula, null);
+        view = inflater.inflate(R.layout.elemento_listview_peliculas, null);
         
         //obtiene la refenrecia de cada opcion y la asigna a in textView
         ImageView imgIdioma = (ImageView)view.findViewById(R.id.portada);
@@ -139,7 +135,7 @@ public class ElementoPeliculaAdaptador extends BaseAdapter {// Clase Adaptadora 
 		return position;
 	}
 	
-	public long getPeliId(int position)
+	public int getPeliId(int position)
 	{
 		return lista.get(position).getId();
 	}

@@ -2,31 +2,18 @@ package com.nestor.practica2_sqlite;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-
-
-import android.R.string;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +21,7 @@ import android.widget.Toast;
 public class LeerFichero extends Activity {
 	ArrayList<String> nombreFichero;
 	File[] files;
-	File fichero;
+	File directorioFicheros;
 	ListView listaFicheros;
 	TextView texto;
 	@Override
@@ -45,21 +32,22 @@ public class LeerFichero extends Activity {
 	   
 		nombreFichero = new ArrayList<String>();// Array TEXTO donde guardaremos los nombres de los ficheros
  
-        fichero = new File(Environment.getExternalStorageDirectory()+"/misFicheros/");//Defino la ruta donde busco los ficheros
-        files = fichero.listFiles(); //crea un vector de tipo ficheros donde los va listar
+        directorioFicheros = new File(Environment.getExternalStorageDirectory()+"/misFicheros/");//Defino la ruta donde busco los ficheros
+        files = directorioFicheros.listFiles(); //obtiene todos los ficheros del directorio y los guarda en una array de Files[]
  
         //Hacemos un Loop por cada fichero para extraer el nombre de cada uno
         for (int i = 0; i < files.length; i++)
  
         {
-            //Sacamos del array files un fichero
+
+        	//Sacamos del array files un fichero
             File file = files[i];
  
             //Si es directorio...
             if (file.isDirectory())
  
             	nombreFichero.add(file.getName() + "/");
- 
+            
             //Si es fichero...
             else
  
@@ -69,7 +57,7 @@ public class LeerFichero extends Activity {
         listaFicheros = (ListView) findViewById(R.id.miListViewFicheros); // declaramos el listview donde va listar los ficheros 
         /*Creo un objeto de ElementoListaAdaptador donde le paso el contexto y los nombre 
         de los ficheros donde los va a listar en el ListView*/
-        ElementoListaAdaptador elemento = new ElementoListaAdaptador(this,nombreFichero); 
+        ElementoMenusAdaptador elemento = new ElementoMenusAdaptador(this,nombreFichero); 
         listaFicheros.setAdapter(elemento);
         
  
@@ -79,15 +67,6 @@ public class LeerFichero extends Activity {
 				//Toast.makeText(getApplicationContext(), "Posicion de fichero: "+nombreFichero.get(position), Toast.LENGTH_LONG).show();//Cuando pulses sobre el nombre de fichero el toast mostrar su posicion 
 				String fichero = nombreFichero.get(position); //obtengo el nombre del fichero a partir de su posicion y se lo paso a la funcion de Leer
 	            LeerTexto(fichero);
-	            
-	            
-				//Este codigo sirvira en el caso si queremos pasar 
-				//el cotenido del item a otra actividad
-				/*Devolvemos el resultado de la selección
-                Intent data = new Intent();
-                data.putExtra("filename", nombreFichero.get(position));
-                setResult(RESULT_OK, data);
-                finish();*/
 			}
 		});
         
@@ -111,7 +90,7 @@ public class LeerFichero extends Activity {
 			public void onClick(View v)
 			{
 					
-				File[] files = fichero.listFiles();
+				File[] files = directorioFicheros.listFiles();
 				try {
 				        for (int i = 0; i < files.length; i++) 
 				        {

@@ -1,7 +1,6 @@
 package com.nestor.practica2_sqlite;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -24,7 +23,7 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 														 "prestado_a",		  // [8]	
 														 "notas",			  // [9]
 														 "valoracion"};		  //[10]
-	private static final String CREAR_TABLA_PELICULAS = "CREATE TABLE "+TABLA_NOMBRE_PELICULAS+" ( "+ATRIBUTOS_PELICULAS[0]+" long primary key autoincrement,"
+	private static final String CREAR_TABLA_PELICULAS = "CREATE TABLE "+TABLA_NOMBRE_PELICULAS+" ( "+ATRIBUTOS_PELICULAS[0]+" integer primary key autoincrement,"
 																								   	+ATRIBUTOS_PELICULAS[1]+" text not null,"
 																								   	+ATRIBUTOS_PELICULAS[2]+" text not null,"
 																								   	+ATRIBUTOS_PELICULAS[3]+" text not null,"
@@ -110,14 +109,17 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 			return statemantInsertar.executeInsert();
 		}
 		
-		public long borrar(long id)
+		public long borrar(int id)
 		{
-			statemantBorrar.bindLong(1, id);
+			Long newID = new Long (id);
+			statemantBorrar.bindLong(1, newID);
 			return statemantBorrar.executeUpdateDelete();
 		}
 		
-		public long modificar(String newGenero, String newTitulo, String newDirector, String newIdioma, String newFormato, String newFecha_ini, String newFecha_fin, String newPrestado_a, String newNotas,long newValoracion, long id)
+		public long modificar(String newGenero, String newTitulo, String newDirector, String newIdioma, String newFormato, String newFecha_ini, String newFecha_fin, String newPrestado_a, String newNotas,long newValoracion,int id)
 		{
+			Long newID = new Long (id); // Convertir Int to Long para el bingLong
+
 			statemantModificar.bindString(1, newGenero); // los 1, 2 son el ? que se pasan en la en la preparacion del statement de las propiedades
 			statemantModificar.bindString(2, newTitulo);
 			statemantModificar.bindString(3, newDirector);
@@ -125,10 +127,10 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 			statemantModificar.bindString(5, newFormato);
 			statemantModificar.bindString(6, newFecha_ini);
 			statemantModificar.bindString(7, newFecha_fin);
-			statemantModificar.bindString(8, newPrestado_a);
+			statemantModificar.bindString(8, newPrestado_a); 
 			statemantModificar.bindString(9, newNotas);
 			statemantModificar.bindLong(10, newValoracion);
-			statemantModificar.bindLong(11, id);
+			statemantModificar.bindLong(11, newID);
 			return statemantModificar.executeUpdateDelete();
 		}
 		
@@ -136,7 +138,6 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 		{
 			ArrayList<Pelicula> lista = new ArrayList<Pelicula>();
 			//String atributos[] = new String[]{"genero","titulo","director","idioma","fecha_ini_prestamo","fecha_fin_prestamo","prestado_a","valoracion","formato","notas"};
-			//String casa = "hola";
 			//String id[] = new String[]{"id"};
 			//String arg[] = new String[]{"2"};
 			Cursor rs = db.query(TABLA_NOMBRE_PELICULAS, ATRIBUTOS_PELICULAS, null, null, null, null,null);
@@ -144,7 +145,7 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 			{
 				do
 				{
-					lista.add(new Pelicula (rs.getLong(0),
+					lista.add(new Pelicula (rs.getInt(0),
 											rs.getString(1),
 											rs.getString(2),
 											rs.getString(3),
@@ -155,18 +156,6 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 											rs.getString(8),
 											rs.getString(9),
 											rs.getLong(10)));
-					
-//					lista.add(rs.getString(0)); //El 0º param es el ID
-//					lista.add(rs.getString(1)); //El 1º parám. es el genero
-//					lista.add(rs.getString(2)); //El 2º parám. es el titulo
-//					lista.add(rs.getString(3)); //El 3º parám. es el director
-//					lista.add(rs.getString(4)); //El 4º parám. es el idioma
-//					lista.add(rs.getString(5)); //El 5º parám. es el formato
-//					lista.add(rs.getString(6)); //El 6º parám. es el fecha_ini_prestamo
-//					lista.add(rs.getString(7)); //El 7º parám. es el fecha_fin_prestamo
-//					lista.add(rs.getString(8)); //El 8º parám. es el prestado_a
-//					lista.add(rs.getString(9)); //El 9º parám. es el notas
-//					lista.add(rs.getString(10)); //El 10º parám. es el valoracion
 				}while (rs.moveToNext());
 			}
 			
@@ -179,18 +168,16 @@ public class DataHelper{//mi clase adaptadora para definir y crear la base de da
 		}	
 		
 		// No hace falta crear una una array de Pelicula ya que devuelve un registro
-		public Pelicula mostrarPelicula(long id)
+		public Pelicula mostrarPelicula(int id)
 		{
 			Pelicula peli = null;
-			//String atributos[] = new String[]{"genero","titulo","director","idioma","fecha_ini_prestamo","fecha_fin_prestamo","prestado_a","valoracion","formato","notas"};
-			//String casa = "hola";
-			String newid[] = new String[]{Long.toString(id)};
+			String newid[] = new String[]{Integer.toString(id)};
 			
 			Cursor rs = db.query(TABLA_NOMBRE_PELICULAS, ATRIBUTOS_PELICULAS, "_id=?", newid, null, null,null);
 			if ( rs.moveToFirst() )
 			{
 				
-				 peli = new Pelicula (rs.getLong(0),
+				 peli = new Pelicula (rs.getInt(0),
 						rs.getString(1),
 						rs.getString(2),
 						rs.getString(3),

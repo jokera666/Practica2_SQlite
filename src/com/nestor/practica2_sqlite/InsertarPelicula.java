@@ -1,17 +1,12 @@
 package com.nestor.practica2_sqlite;
 
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +19,6 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class InsertarPelicula extends Activity {
 	
@@ -59,18 +53,18 @@ public class InsertarPelicula extends Activity {
 	EditText notas;
 	RatingBar valoracion;
 	
-	private DataHelper peli;
+	private DataHelper dataHelperPelicula;
 	
-	long id_recibido=-1;
+	int id_recibido=-1;
 	Bundle contenedor_recibido;
-	Pelicula selectPeliEditar;
+	Pelicula peliEditar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_insertar_pelicula);
 		
-		peli = new DataHelper(this); // this es igual a getApplicationContext()
+		dataHelperPelicula = new DataHelper(this); // this es igual a getApplicationContext()
 		
 		titulo = (EditText)findViewById(R.id.editTitulo);
 		director = (EditText)findViewById(R.id.editDirector);
@@ -101,36 +95,36 @@ public class InsertarPelicula extends Activity {
 		contenedor_recibido  = this.getIntent().getExtras();
         if (contenedor_recibido!=null)
         {
-        	id_recibido = contenedor_recibido.getLong("idPelicula");
+        	id_recibido = contenedor_recibido.getInt("idPelicula");
         	
-        	selectPeliEditar = peli.mostrarPelicula(id_recibido);
+        	peliEditar = dataHelperPelicula.mostrarPelicula(id_recibido);
         	
         	
         	ArrayAdapter aux1Adapter;
         	aux1Adapter = (ArrayAdapter) spinGenero.getAdapter(); // adaptador auxuliar que obtiene el adaptador de spinGenero
-        	int posicionGen = aux1Adapter.getPosition(selectPeliEditar.getGenero()); //optiene la posicion del getGenero
+        	int posicionGen = aux1Adapter.getPosition(peliEditar.getGenero()); //optiene la posicion del getGenero
         	spinGenero.setSelection(posicionGen);// establece la posicion al spinGenero
         	
-        	titulo.setText(selectPeliEditar.getTitulo());
-        	director.setText(selectPeliEditar.getDirector());
+        	titulo.setText(peliEditar.getTitulo());
+        	director.setText(peliEditar.getDirector());
         	
         	ArrayAdapter aux2Adapter;
         	aux2Adapter = (ArrayAdapter) spinIdioma.getAdapter();
-        	int posicionIdi = aux2Adapter.getPosition(selectPeliEditar.getIdioma());
+        	int posicionIdi = aux2Adapter.getPosition(peliEditar.getIdioma());
         	spinIdioma.setSelection(posicionIdi);
         	
         	ArrayAdapter aux3Adapter;
         	aux3Adapter = (ArrayAdapter) spinFormato.getAdapter();
-        	int posicionFor = aux3Adapter.getPosition(selectPeliEditar.getFormato());
+        	int posicionFor = aux3Adapter.getPosition(peliEditar.getFormato());
         	spinFormato.setSelection(posicionFor);
         	
-        	fecha_ini.setText(selectPeliEditar.getFechaIni());
-        	fecha_fin.setText(selectPeliEditar.getFechaFin());
+        	fecha_ini.setText(peliEditar.getFechaIni());
+        	fecha_fin.setText(peliEditar.getFechaFin());
         	
-        	prestado_a.setText(selectPeliEditar.getPrestado_a());
-        	notas.setText(selectPeliEditar.getNotas());
+        	prestado_a.setText(peliEditar.getPrestado_a());
+        	notas.setText(peliEditar.getNotas());
         	
-        	valoracion.setRating(selectPeliEditar.getValoracion());
+        	valoracion.setRating(peliEditar.getValoracion());
         }
 		
 		
@@ -142,7 +136,7 @@ public class InsertarPelicula extends Activity {
 			public void onClick(View v)
 			{
 					        	 
-		         // Obtener la fecha a partider de un DatePicker e mostrarlo en un textView
+		      // Obtener la fecha a partider de un DatePicker e mostrarlo en un textView
 			  final Calendar c = Calendar.getInstance();
 			  mYear = c.get(Calendar.YEAR);
 			  mMonth = c.get(Calendar.MONTH);
@@ -172,7 +166,7 @@ public class InsertarPelicula extends Activity {
 			public void onClick(View v)
 			{
 					        	 
-		         // Obtener la fecha a partider de un DatePicker e mostrarlo en un textView
+		       // Obtener la fecha a partider de un DatePicker e mostrarlo en un textView
 			  final Calendar c = Calendar.getInstance();
 			  mYear = c.get(Calendar.YEAR);
 			  mMonth = c.get(Calendar.MONTH);
@@ -214,6 +208,7 @@ public class InsertarPelicula extends Activity {
 				inValoracion = valoracion.getRating();
 				long longValoracion = (long) Math.ceil(inValoracion);
 				
+				//Comprobacion del formuario
 				if(inTitulo.length() == 0){ // comprobacion de error EditText Campo vacio
 					Toast.makeText(getBaseContext(), "El campo Titulo es obligatorio", Toast.LENGTH_LONG).show();
 		        	return; // Detiene la actividad
@@ -227,17 +222,17 @@ public class InsertarPelicula extends Activity {
 				
 				
 				
-				//variable de insertar / editar
+				// id_recibido es: variable de insertar / editar
 				if(id_recibido==-1)
 				{
-					peli.insertar(inGenero,inTitulo,inDirector,inIdioma,inFormato,inFechaIni,inFechaFin,inPrestado_a,inNotas,longValoracion);
+					dataHelperPelicula.insertar(inGenero,inTitulo,inDirector,inIdioma,inFormato,inFechaIni,inFechaFin,inPrestado_a,inNotas,longValoracion);
 					Intent intent = new Intent(InsertarPelicula.this,ListarPeliculas.class);
 					startActivity(intent);	
 				}
 				
 				else
 				{
-					peli.modificar(inGenero,inTitulo,inDirector,inIdioma,inFormato,inFechaIni,inFechaFin,inPrestado_a,inNotas,longValoracion,id_recibido);
+					dataHelperPelicula.modificar(inGenero,inTitulo,inDirector,inIdioma,inFormato,inFechaIni,inFechaFin,inPrestado_a,inNotas,longValoracion,id_recibido);
 					Intent intent = new Intent(InsertarPelicula.this,ListarPeliculas.class);
 					startActivity(intent);	
 				}

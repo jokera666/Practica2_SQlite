@@ -3,7 +3,7 @@ package com.nestor.practica2_sqlite;
 public class Pelicula {
 	
 	//Propiedades de la pelicula
-	long id;
+	int id;
 	String genero;
 	String titulo;
 	String director;
@@ -16,7 +16,7 @@ public class Pelicula {
 	long valoracion;
 	
 	//constructor por defecto
-	public Pelicula(long id,
+	public Pelicula(int id,
 					String genero,
 					String titulo,
 					String director,
@@ -43,7 +43,7 @@ public class Pelicula {
 					}
 	
 	//SETERS
-	public void setId(long id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}
@@ -100,7 +100,7 @@ public class Pelicula {
 	
 	
 	//GETERS
-	public long getId()
+	public int getId()
 	{
 		return id;
 	}

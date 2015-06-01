@@ -1,9 +1,7 @@
 package com.nestor.practica2_sqlite;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,9 +9,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -22,7 +18,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class AlmacenInter extends Activity {
 	///Propiedades de la clase AlmacenInter
     ListView listView;
-    ElementoListaAdaptador elemento;
+    ElementoMenusAdaptador elemento;
     Toast mensaje;
     
     @Override
@@ -36,7 +32,7 @@ public class AlmacenInter extends Activity {
         Resources res = getResources(); // obtener recurso
         Collections.addAll(list, res.getStringArray(R.array.listaOpciones)); // obtengo los recursos del arrays.xml y se los paso a mi lista
  
-	    elemento  = new ElementoListaAdaptador(this,list);// creo un objeto de mi lista adaptador y le paso la array con las opciones y el contexto
+	    elemento  = new ElementoMenusAdaptador(this,list);// creo un objeto de mi lista adaptador y le paso la array con las opciones y el contexto
 	    
 	    // establesco el mi adaptador al list view
 	    listView.setAdapter(elemento);

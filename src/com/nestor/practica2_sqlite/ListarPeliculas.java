@@ -1,9 +1,6 @@
 package com.nestor.practica2_sqlite;
 
 import java.util.ArrayList;
-import java.util.List;
-
-
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,72 +15,68 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class ListarPeliculas extends Activity {
 
 	ListView listaPeliculas;
-	ArrayList<Pelicula> selectTodasPelis;
-	ElementoPeliculaAdaptador pelis;
-	DataHelper peli1;
-	long idPeliSelecionada;
-	int positionLong;
+	ArrayList<Pelicula> arrayPeliculas;
+	ElementoPeliculaAdaptador adaptadorPelicula;
+	DataHelper dataHelperPelicula;
+	int posicionPulsada;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listar_peliculas);
 		
-		peli1 = new DataHelper(this);
+		dataHelperPelicula = new DataHelper(this);
 		listaPeliculas = (ListView)findViewById(R.id.miListViewPeliculas);
 		
-		registerForContextMenu(listaPeliculas); //es necesario para el menu contextual
+		registerForContextMenu(listaPeliculas); //es necesario para el menu contextual pasandole el listview
 	
-		selectTodasPelis = peli1.mostrarTodo();
+		arrayPeliculas = dataHelperPelicula.mostrarTodo();
 		
 	    //Si no hay registros mostramos un aviso
-	    if (selectTodasPelis.isEmpty())
+	    if (arrayPeliculas.isEmpty())
 	    {
 	    	Toast.makeText(getBaseContext(), "No se han encontrado registros", Toast.LENGTH_LONG).show();
 	    }
 	    
 	 	
 		
-	    pelis = new ElementoPeliculaAdaptador(this,selectTodasPelis); 
-        listaPeliculas.setAdapter(pelis);
+	    adaptadorPelicula = new ElementoPeliculaAdaptador(this,arrayPeliculas); 
+        listaPeliculas.setAdapter(adaptadorPelicula);
         
         
         
-        	// Accion para realizar al pulsar sobre un item de la lista        
-        	listaPeliculas.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-				//Toast.makeText(getApplicationContext(), "ID de la pelicula: "+pelis.getPeliId(position), Toast.LENGTH_LONG).show(); 
-				
-				
-				//Creamos el Intent
-            	Intent intent = new Intent(ListarPeliculas.this, InsertarPelicula.class);
-            	
-            	//Creamos la informacion a pasar entre actividades
-            	Bundle contenedor = new Bundle();
-            	contenedor.putLong("idPelicula",pelis.getPeliId(position)); 
-        
-            	//Añadimos la informacion al intent
-            	intent.putExtras(contenedor);
-            	//ponemos en marcha la nueva actividad
-            	startActivity(intent);
-				
-			}
-		});		
+    	// Accion para realizar al pulsar sobre un item de la lista        
+    	listaPeliculas.setOnItemClickListener(new OnItemClickListener() {
+		public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+			//Toast.makeText(getApplicationContext(), "ID de la pelicula: "+pelis.getPeliId(position), Toast.LENGTH_LONG).show(); 
+			
+			
+			//Creamos el Intent
+        	Intent intent = new Intent(ListarPeliculas.this, InsertarPelicula.class);
+        	
+        	//Creamos la informacion a pasar entre actividades
+        	Bundle contenedor = new Bundle();
+        	contenedor.putInt("idPelicula",adaptadorPelicula.getPeliId(position)); 
+    
+        	//Añadimos la informacion al intent
+        	intent.putExtras(contenedor);
+        	//ponemos en marcha la nueva actividad
+        	startActivity(intent);
+			
+		}
+	});		
 	}
 	
-	//Menu contextual
+/*#####################-->MENU CONTEXTUAL<--########################*/
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo){
 	super.onCreateContextMenu(menu, v, menuInfo);
@@ -100,19 +93,19 @@ public class ListarPeliculas extends Activity {
 	switch (item.getItemId()){
 	case R.id.borrar:
 		AlertDialog.Builder advertencia = new AlertDialog.Builder(this);
-		positionLong = ((AdapterContextMenuInfo) item.getMenuInfo()).position;
-		String nombrePeli = selectTodasPelis.get(positionLong).getTitulo();
+		posicionPulsada = ((AdapterContextMenuInfo) item.getMenuInfo()).position;
+		String nombrePeli = arrayPeliculas.get(posicionPulsada).getTitulo();
 		advertencia.setTitle("Borrar la pelicula "+nombrePeli);
 		advertencia.setMessage("Seguro que quieres borrar la pelicula?");
 		
 		advertencia.setPositiveButton("Sí", new OnClickListener() {
 				public void onClick(DialogInterface dialog, int arg1) {
 					
-					peli1.borrar(selectTodasPelis.get(positionLong).getId());
+					dataHelperPelicula.borrar(arrayPeliculas.get(posicionPulsada).getId());
 					//Refrescar el ListView despues del borrado cerrando y abriendo la actividad
 					ListarPeliculas.this.finish();	
 					startActivity(new Intent(ListarPeliculas.this, ListarPeliculas.this.getClass()));
-					
+
 				}
 				});
 		
@@ -125,17 +118,17 @@ public class ListarPeliculas extends Activity {
 		advertencia.show();
 		
 		
-	return true;
-
-	default:
-	return super.onContextItemSelected(item);
-	}
+		return true;
+	
+		default:
+		return super.onContextItemSelected(item);
+	 	}
 	}
 	
-
+/*################-->FIN MENU CONTEXTUAL<--####################*/
 
 	
-	// Menu de navegacion (action bar)
+/*################-->MENU BARRA DE NAVEGACION<--###############*/
 	 @Override
      public boolean onCreateOptionsMenu(Menu menu) {
           // Inflate the menu; añade los elemnetos del menu
@@ -182,7 +175,7 @@ public class ListarPeliculas extends Activity {
       		advertencia.setPositiveButton("Si", new OnClickListener() {
       				public void onClick(DialogInterface dialog, int arg1) {
       					
-      				peli1.borrarTodo();
+      				dataHelperPelicula.borrarTodo();
 					ListarPeliculas.this.finish();	
 					startActivity(new Intent(ListarPeliculas.this, ListarPeliculas.this.getClass()));
       					
@@ -211,4 +204,5 @@ public class ListarPeliculas extends Activity {
           }
           return super.onOptionsItemSelected(item);
      }
+/*################-->FIN MENU BARRA DE NAVEGACION<--###############*/
 }

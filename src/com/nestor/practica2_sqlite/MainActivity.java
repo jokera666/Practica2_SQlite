@@ -1,8 +1,14 @@
+/*############################################################################
+# Nombre de la practica: Practica 2: Gestos y Almacenamiento				 #
+# NIE: X-5720766-E                                                           #
+# Realizada por: Nestor Dobrinov Edrev                                       #
+# Curso: 3º Grado de ingenieria informatica en tecnologias de la informacion #
+# Asignatura: DADM - Desarrollo de Aplicaciones para Dispositivos Moviles    #
+# Fecha: 01/64/2015                                                          #
+############################################################################## */
 package com.nestor.practica2_sqlite;
 
 import java.util.ArrayList;
-
-
 
 import android.app.Activity;
 import android.content.Intent;
@@ -84,10 +90,10 @@ public class MainActivity extends Activity implements
 
 			// Recorremos las puntuaciones de las predicciones y las mostramos
 			// en el TextView
-			salida.setText("Prediccion de los diversos gestos\n");
-			for (Prediction prediction : predictions) {
-				salida.append(prediction.name + " " + prediction.score + "\n");
-			}
+			//salida.setText("Prediccion de los diversos gestos\n");
+			//for (Prediction prediction : predictions) {
+			//	salida.append(prediction.name + " " + prediction.score + "\n");
+			//}
 
 		}
 	}
